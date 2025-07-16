@@ -14,5 +14,15 @@ namespace SportProductApp.SportFlow {
 
         protected form = new OrdersForm(this.idPrefix);
 
+        protected afterLoadEntity() {
+            super.afterLoadEntity();
+
+            if (this.isNew()) {
+                const today = Q.formatDate(new Date(), "yyyy/MM/dd");
+                this.form.DateCreated.value = today;
+                this.form.PublicId.value = "ORD";
+                this.form.Address.value = "DIR";
+            }
+        }
     }
 }

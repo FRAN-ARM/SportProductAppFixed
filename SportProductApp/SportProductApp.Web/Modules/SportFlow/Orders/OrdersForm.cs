@@ -16,10 +16,14 @@ namespace SportProductApp.SportFlow.Forms
     /*[BasedOnRow(typeof(Entities.OrdersRow), CheckNames = true)]*/
     public class OrdersForm
     {
+        [Hidden]
         public String PublicId { get; set; }
+
+        [LookupEditor(typeof(CustomersRow), AutoComplete = true)]
         public Int32 CustomerId { get; set; }
         public OrderStatusKind Status { get; set; }
-        //public String Address { get; set; }
+        [Hidden]
+        public String Address { get; set; }
         [DisplayName("Provincia"), LookupEditor(typeof(ProvincesRow), InplaceAdd = false, AutoComplete = true)]
         public Int32? ProvinceId { get; set; }
 
@@ -28,6 +32,8 @@ namespace SportProductApp.SportFlow.Forms
 
         [DisplayName("Items"), OrderDetailsEditor]
         public List<OrderDetailsRow> ItemList { get; set; }
+
+        [DisplayName("Creation Date"), ReadOnly(true), Width(200)]
 
         public DateTime DateCreated { get; set; }
     }

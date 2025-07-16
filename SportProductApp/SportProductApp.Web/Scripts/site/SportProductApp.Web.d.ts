@@ -718,6 +718,8 @@ declare namespace SportProductApp.SportFlow {
         const idProperty = "CustomerId";
         const nameProperty = "PublicId";
         const localTextPrefix = "SportFlow.Customers";
+        const lookupKey = "SportFlow.Customers";
+        function getLookup(): Q.Lookup<CustomersRow>;
         const deletePermission = "Administration:General";
         const insertPermission = "Administration:General";
         const readPermission = "Administration:General";
@@ -849,8 +851,9 @@ declare namespace SportProductApp.SportFlow {
 declare namespace SportProductApp.SportFlow {
     interface OrdersForm {
         PublicId: Serenity.StringEditor;
-        CustomerId: Serenity.IntegerEditor;
+        CustomerId: Serenity.LookupEditor;
         Status: Serenity.EnumEditor;
+        Address: Serenity.StringEditor;
         ProvinceId: Serenity.LookupEditor;
         CityId: Serenity.LookupEditor;
         ItemList: OrderDetailsEditor;
@@ -876,6 +879,8 @@ declare namespace SportProductApp.SportFlow {
         CustomerCreditCard?: string;
         CustomerDateCreated?: string;
         ItemList?: OrderDetailsRow[];
+        ProvinceId?: number;
+        CityId?: number;
     }
     namespace OrdersRow {
         const idProperty = "OrderId";
@@ -897,7 +902,9 @@ declare namespace SportProductApp.SportFlow {
             CustomerName = "CustomerName",
             CustomerCreditCard = "CustomerCreditCard",
             CustomerDateCreated = "CustomerDateCreated",
-            ItemList = "ItemList"
+            ItemList = "ItemList",
+            ProvinceId = "ProvinceId",
+            CityId = "CityId"
         }
     }
 }
@@ -1563,6 +1570,7 @@ declare namespace SportProductApp.SportFlow {
         protected getInsertPermission(): string;
         protected getUpdatePermission(): string;
         protected form: OrdersForm;
+        protected afterLoadEntity(): void;
     }
 }
 declare namespace SportProductApp.SportFlow {

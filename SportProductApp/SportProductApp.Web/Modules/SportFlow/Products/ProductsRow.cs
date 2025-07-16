@@ -38,6 +38,7 @@ namespace SportProductApp.SportFlow.Entities
         }
 
         [DisplayName("Price"), Size(10), Scale(2), NotNull]
+        [LookupInclude]
         public Decimal? Price
         {
             get { return Fields.Price[this]; }

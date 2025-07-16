@@ -101,6 +101,21 @@ namespace SportProductApp.SportFlow.Entities
             set => Fields.ItemList[this] = value;
         }
 
+        [Hidden]
+        [NotMapped]
+        public Int32? ProvinceId
+        {
+            get { return Fields.ProvinceId[this]; }
+            set { Fields.ProvinceId[this] = value; }
+        }
+
+        [Hidden]
+        [NotMapped]
+        public Int32? CityId
+        {
+            get { return Fields.CityId[this]; }
+            set { Fields.CityId[this] = value; }
+        }
 
         IIdField IIdRow.IdField
         {
@@ -134,8 +149,8 @@ namespace SportProductApp.SportFlow.Entities
             public StringField CustomerCreditCard;
             public DateTimeField CustomerDateCreated;
             public RowListField<OrderDetailsRow> ItemList;
-            public Int32? ProvinceId { get; set; }
-            public Int32? CityId { get; set; }
+            public Int32Field ProvinceId;
+            public Int32Field CityId;
         }
     }
 }

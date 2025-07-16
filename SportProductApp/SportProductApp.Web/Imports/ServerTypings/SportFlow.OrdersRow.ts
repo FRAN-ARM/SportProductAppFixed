@@ -12,6 +12,8 @@
         CustomerCreditCard?: string;
         CustomerDateCreated?: string;
         ItemList?: OrderDetailsRow[];
+        ProvinceId?: number;
+        CityId?: number;
     }
 
     export namespace OrdersRow {
@@ -35,7 +37,9 @@
             CustomerName = "CustomerName",
             CustomerCreditCard = "CustomerCreditCard",
             CustomerDateCreated = "CustomerDateCreated",
-            ItemList = "ItemList"
+            ItemList = "ItemList",
+            ProvinceId = "ProvinceId",
+            CityId = "CityId"
         }
     }
 }

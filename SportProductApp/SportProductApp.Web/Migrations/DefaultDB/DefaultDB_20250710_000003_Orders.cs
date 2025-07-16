@@ -11,7 +11,7 @@ namespace SportProductApp.Migrations.DefaultDB
             //Down();
             Create.Table("Orders")
                 .WithColumn("OrderId").AsInt32().PrimaryKey().Identity()
-                .WithColumn("PublicId").AsString(64).NotNullable().Unique()
+                .WithColumn("PublicId").AsString(128).NotNullable().Unique()
                 .WithColumn("CustomerId").AsInt32().NotNullable()
                 .WithColumn("Status").AsString(50).NotNullable().WithDefaultValue("Pending")
                 .WithColumn("Address").AsString(248).NotNullable().WithDefaultValue("")

@@ -26,6 +26,11 @@
         export const idProperty = 'CustomerId';
         export const nameProperty = 'PublicId';
         export const localTextPrefix = 'SportFlow.Customers';
+        export const lookupKey = 'SportFlow.Customers';
+
+        export function getLookup(): Q.Lookup<CustomersRow> {
+            return Q.getLookup<CustomersRow>('SportFlow.Customers');
+        }
         export const deletePermission = 'Administration:General';
         export const insertPermission = 'Administration:General';
         export const readPermission = 'Administration:General';
