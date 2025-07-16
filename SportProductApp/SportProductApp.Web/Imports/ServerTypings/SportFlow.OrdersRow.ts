@@ -3,7 +3,7 @@
         OrderId?: number;
         PublicId?: string;
         CustomerId?: number;
-        Status?: string;
+        Status?: SportFlow.Order.Enums.OrderStatusKind;
         Address?: string;
         DateCreated?: string;
         CustomerPublicId?: string;
@@ -11,6 +11,7 @@
         CustomerName?: string;
         CustomerCreditCard?: string;
         CustomerDateCreated?: string;
+        ItemList?: OrderDetailsRow[];
     }
 
     export namespace OrdersRow {
@@ -33,7 +34,8 @@
             CustomerUserId = "CustomerUserId",
             CustomerName = "CustomerName",
             CustomerCreditCard = "CustomerCreditCard",
-            CustomerDateCreated = "CustomerDateCreated"
+            CustomerDateCreated = "CustomerDateCreated",
+            ItemList = "ItemList"
         }
     }
 }

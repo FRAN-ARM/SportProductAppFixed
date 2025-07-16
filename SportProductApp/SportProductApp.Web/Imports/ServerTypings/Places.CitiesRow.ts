@@ -10,6 +10,11 @@
         export const idProperty = 'CityId';
         export const nameProperty = 'Name';
         export const localTextPrefix = 'Places.Cities';
+        export const lookupKey = 'Places.Cities';
+
+        export function getLookup(): Q.Lookup<CitiesRow> {
+            return Q.getLookup<CitiesRow>('Places.Cities');
+        }
         export const deletePermission = 'Administration:General';
         export const insertPermission = 'Administration:General';
         export const readPermission = 'Administration:General';

@@ -8,9 +8,10 @@ namespace SportProductApp.Places.Forms
     using System.ComponentModel;
     using System.Collections.Generic;
     using System.IO;
+    using SportProductApp.Places.Entities;
 
     [FormScript("Places.Provinces")]
-    [BasedOnRow(typeof(Entities.ProvincesRow), CheckNames = true)]
+    [BasedOnRow(typeof(ProvincesRow), CheckNames = true)]
     public class ProvincesForm
     {
         public String Name { get; set; }

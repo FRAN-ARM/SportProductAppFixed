@@ -1,3 +1,0 @@
-﻿namespace SportProductApp.SportFlow {
-}
-

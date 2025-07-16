@@ -1071,6 +1071,9 @@
     <TypeScriptCompile Include="Imports\ServerTypings\SportFlow.CustomersColumns.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\SportFlow.Order.Enums.OrderStatusKind.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Imports\ServerTypings\SportFlow.OrderDetailsColumns.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
@@ -1080,25 +1083,17 @@
     <TypeScriptCompile Include="Imports\ServerTypings\SportFlow.ProductsColumns.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\SportFlow.UsersCostumers.UsersCustomersRequest.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\SportFlow.UsersCostumersColumns.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\SportFlow.UsersCostumersForm.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\SportFlow.UsersCostumersRow.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\SportFlow.UsersCostumersService.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
     <TypeScriptCompile Include="Imports\ServerTypings\Texts.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Modules\Membership\Account\LoginPanel.ts" />
+    <TypeScriptCompile Include="Modules\SportFlow\OrderDetails\OrderDetailsEditor.ts" />
+    <Compile Include="Imports\ClientTypes\SportFlow.OrderDetailsEditorAttribute.cs">
+      <DependentUpon>ClientTypes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\DefaultDB\DefaultDB_20250710_000008_OrdersChangeTypeStatus.cs" />
+    <Compile Include="Modules\Places\Cities\CitiesLookup.cs" />
+    <Compile Include="Modules\SportFlow\OrderDetails\OrderDetailsEditorAttribute.cs" />
     <TypeScriptCompile Include="node_modules\%40types\jquery\index.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\jqueryui\index.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\jquery.blockui\index.d.ts" />
@@ -1845,6 +1840,7 @@
     <Compile Include="Modules\Common\Helpers\GetNextNumberHelper.cs" />
     <Compile Include="Modules\Common\Helpers\GetNextNumberRequest.cs" />
     <Compile Include="Modules\SportFlow\Customers\CustomersRequest.cs" />
+    <Compile Include="Modules\SportFlow\Orders\OrderStatus.cs" />
     <Compile Include="Modules\Texts.cs" />
     <Compile Include="Modules\Membership\Account\AccountPage.cs" />
     <Compile Include="Modules\Administration\User\Authentication\AuthorizationService.cs" />

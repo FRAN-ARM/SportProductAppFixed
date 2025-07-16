@@ -8,6 +8,11 @@
         export const idProperty = 'ProvinceId';
         export const nameProperty = 'Name';
         export const localTextPrefix = 'Places.Provinces';
+        export const lookupKey = 'Places.Provinces';
+
+        export function getLookup(): Q.Lookup<ProvincesRow> {
+            return Q.getLookup<ProvincesRow>('Places.Provinces');
+        }
         export const deletePermission = 'Administration:General';
         export const insertPermission = 'Administration:General';
         export const readPermission = 'Administration:General';

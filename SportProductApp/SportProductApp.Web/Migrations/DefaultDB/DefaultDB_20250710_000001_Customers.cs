@@ -2,6 +2,7 @@
 using System;
 namespace SportProductApp.Migrations.DefaultDB
 {
+    // Clientes. Cuando se crea un cliente, se crea un usuario tambien.
     [Migration(20250710000001)]
     public class DefaultDB_20250710_000001_Customers : Migration
     {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 namespace SportProductApp.Migrations.DefaultDB
 {
+    // Ubicaciones geograficas. Provincias / Ciudades.
     [Migration(20250710000006)]
     public class DefaultDB_20250710_000006_Locations : Migration
     {

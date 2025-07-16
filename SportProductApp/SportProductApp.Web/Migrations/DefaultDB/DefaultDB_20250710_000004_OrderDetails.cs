@@ -2,6 +2,7 @@
 using System;
 namespace SportProductApp.Migrations.DefaultDB
 {
+    // Detalles de las ordenes. Permite que una orden tenga varios productos asociados.
     [Migration(20250710000004)]
     public class DefaultDB_20250710_000004_OrderDetails : Migration
     {

@@ -535,6 +535,11 @@ var SportProductApp;
             CitiesRow.idProperty = 'CityId';
             CitiesRow.nameProperty = 'Name';
             CitiesRow.localTextPrefix = 'Places.Cities';
+            CitiesRow.lookupKey = 'Places.Cities';
+            function getLookup() {
+                return Q.getLookup('Places.Cities');
+            }
+            CitiesRow.getLookup = getLookup;
             CitiesRow.deletePermission = 'Administration:General';
             CitiesRow.insertPermission = 'Administration:General';
             CitiesRow.readPermission = 'Administration:General';
@@ -596,6 +601,11 @@ var SportProductApp;
             ProvincesRow.idProperty = 'ProvinceId';
             ProvincesRow.nameProperty = 'Name';
             ProvincesRow.localTextPrefix = 'Places.Provinces';
+            ProvincesRow.lookupKey = 'Places.Provinces';
+            function getLookup() {
+                return Q.getLookup('Places.Provinces');
+            }
+            ProvincesRow.getLookup = getLookup;
             ProvincesRow.deletePermission = 'Administration:General';
             ProvincesRow.insertPermission = 'Administration:General';
             ProvincesRow.readPermission = 'Administration:General';
@@ -695,6 +705,25 @@ var SportProductApp;
 (function (SportProductApp) {
     var SportFlow;
     (function (SportFlow) {
+        var Order;
+        (function (Order) {
+            var Enums;
+            (function (Enums) {
+                var OrderStatusKind;
+                (function (OrderStatusKind) {
+                    OrderStatusKind[OrderStatusKind["Pending"] = 0] = "Pending";
+                    OrderStatusKind[OrderStatusKind["Canceled"] = 1] = "Canceled";
+                    OrderStatusKind[OrderStatusKind["Completed"] = 2] = "Completed";
+                })(OrderStatusKind = Enums.OrderStatusKind || (Enums.OrderStatusKind = {}));
+                Serenity.Decorators.registerEnumType(OrderStatusKind, 'SportProductApp.SportFlow.Order.Enums.OrderStatusKind', 'SportFlow.OrderStatusKind');
+            })(Enums = Order.Enums || (Order.Enums = {}));
+        })(Order = SportFlow.Order || (SportFlow.Order = {}));
+    })(SportFlow = SportProductApp.SportFlow || (SportProductApp.SportFlow = {}));
+})(SportProductApp || (SportProductApp = {}));
+var SportProductApp;
+(function (SportProductApp) {
+    var SportFlow;
+    (function (SportFlow) {
         var OrderDetailsForm = /** @class */ (function (_super) {
             __extends(OrderDetailsForm, _super);
             function OrderDetailsForm(prefix) {
@@ -768,13 +797,18 @@ var SportProductApp;
                     var s = Serenity;
                     var w0 = s.StringEditor;
                     var w1 = s.IntegerEditor;
-                    var w2 = s.DateEditor;
+                    var w2 = s.EnumEditor;
+                    var w3 = s.LookupEditor;
+                    var w4 = SportFlow.OrderDetailsEditor;
+                    var w5 = s.DateEditor;
                     Q.initFormType(OrdersForm, [
                         'PublicId', w0,
                         'CustomerId', w1,
-                        'Status', w0,
-                        'Address', w0,
-                        'DateCreated', w2
+                        'Status', w2,
+                        'ProvinceId', w3,
+                        'CityId', w3,
+                        'ItemList', w4,
+                        'DateCreated', w5
                     ]);
                 }
                 return _this;
@@ -860,6 +894,11 @@ var SportProductApp;
             ProductsRow.idProperty = 'ProductId';
             ProductsRow.nameProperty = 'PublicId';
             ProductsRow.localTextPrefix = 'SportFlow.Products';
+            ProductsRow.lookupKey = 'SportFlow.Products';
+            function getLookup() {
+                return Q.getLookup('SportFlow.Products');
+            }
+            ProductsRow.getLookup = getLookup;
             ProductsRow.deletePermission = 'Administration:General';
             ProductsRow.insertPermission = 'Administration:General';
             ProductsRow.readPermission = 'Administration:General';
@@ -890,72 +929,9 @@ var SportProductApp;
 })(SportProductApp || (SportProductApp = {}));
 var SportProductApp;
 (function (SportProductApp) {
-    var SportFlow;
-    (function (SportFlow) {
-        var UsersCostumersForm = /** @class */ (function (_super) {
-            __extends(UsersCostumersForm, _super);
-            function UsersCostumersForm(prefix) {
-                var _this = _super.call(this, prefix) || this;
-                if (!UsersCostumersForm.init) {
-                    UsersCostumersForm.init = true;
-                    var s = Serenity;
-                    var w0 = s.StringEditor;
-                    Q.initFormType(UsersCostumersForm, [
-                        'Username', w0,
-                        'DisplayName', w0,
-                        'Email', w0
-                    ]);
-                }
-                return _this;
-            }
-            UsersCostumersForm.formKey = 'SportFlow.UsersCostumers';
-            return UsersCostumersForm;
-        }(Serenity.PrefixedContext));
-        SportFlow.UsersCostumersForm = UsersCostumersForm;
-    })(SportFlow = SportProductApp.SportFlow || (SportProductApp.SportFlow = {}));
-})(SportProductApp || (SportProductApp = {}));
-var SportProductApp;
-(function (SportProductApp) {
-    var SportFlow;
-    (function (SportFlow) {
-        var UsersCostumersRow;
-        (function (UsersCostumersRow) {
-            UsersCostumersRow.idProperty = 'Id';
-            UsersCostumersRow.nameProperty = 'Username';
-            UsersCostumersRow.localTextPrefix = 'SportFlow.UsersCostumers';
-            UsersCostumersRow.deletePermission = 'Administration:General';
-            UsersCostumersRow.insertPermission = 'Administration:General';
-            UsersCostumersRow.readPermission = 'Administration:General';
-            UsersCostumersRow.updatePermission = 'Administration:General';
-        })(UsersCostumersRow = SportFlow.UsersCostumersRow || (SportFlow.UsersCostumersRow = {}));
-    })(SportFlow = SportProductApp.SportFlow || (SportProductApp.SportFlow = {}));
-})(SportProductApp || (SportProductApp = {}));
-var SportProductApp;
-(function (SportProductApp) {
-    var SportFlow;
-    (function (SportFlow) {
-        var UsersCostumersService;
-        (function (UsersCostumersService) {
-            UsersCostumersService.baseUrl = 'SportFlow/UsersCostumers';
-            [
-                'Create',
-                'Update',
-                'Delete',
-                'Retrieve',
-                'List'
-            ].forEach(function (x) {
-                UsersCostumersService[x] = function (r, s, o) {
-                    return Q.serviceRequest(UsersCostumersService.baseUrl + '/' + x, r, s, o);
-                };
-            });
-        })(UsersCostumersService = SportFlow.UsersCostumersService || (SportFlow.UsersCostumersService = {}));
-    })(SportFlow = SportProductApp.SportFlow || (SportProductApp.SportFlow = {}));
-})(SportProductApp || (SportProductApp = {}));
-var SportProductApp;
-(function (SportProductApp) {
     var Texts;
     (function (Texts) {
-        SportProductApp['Texts'] = Q.proxyTexts(Texts, '', { Db: { Administration: { Language: { Id: 1, LanguageId: 1, LanguageName: 1 }, Role: { RoleId: 1, RoleName: 1 }, RolePermission: { PermissionKey: 1, RoleId: 1, RolePermissionId: 1, RoleRoleName: 1 }, Translation: { CustomText: 1, EntityPlural: 1, Key: 1, OverrideConfirmation: 1, SaveChangesButton: 1, SourceLanguage: 1, SourceText: 1, TargetLanguage: 1, TargetText: 1 }, User: { DisplayName: 1, Email: 1, InsertDate: 1, InsertUserId: 1, IsActive: 1, LastDirectoryUpdate: 1, Password: 1, PasswordConfirm: 1, PasswordHash: 1, PasswordSalt: 1, PublicId: 1, Source: 1, UpdateDate: 1, UpdateUserId: 1, UserId: 1, UserImage: 1, Username: 1 }, UserPermission: { Granted: 1, PermissionKey: 1, User: 1, UserId: 1, UserPermissionId: 1, Username: 1 }, UserRole: { RoleId: 1, User: 1, UserId: 1, UserRoleId: 1, Username: 1 } }, Common: { UserPreference: { Name: 1, PreferenceType: 1, UserId: 1, UserPreferenceId: 1, Value: 1 } }, Places: { Cities: { CityId: 1, Name: 1, ProvinceId: 1, ProvinceName: 1 }, Provinces: { Name: 1, ProvinceId: 1 } }, SportFlow: { Customers: { CreditCard: 1, CustomerId: 1, DateCreated: 1, Name: 1, PublicId: 1, UserDisplayName: 1, UserEmail: 1, UserId: 1, UserInsertDate: 1, UserInsertUserId: 1, UserIsActive: 1, UserLastDirectoryUpdate: 1, UserPasswordHash: 1, UserPasswordSalt: 1, UserPublicId: 1, UserSource: 1, UserUpdateDate: 1, UserUpdateUserId: 1, UserUserImage: 1, UserUsername: 1 }, OrderDetails: { OrderAddress: 1, OrderCustomerId: 1, OrderDateCreated: 1, OrderDetailId: 1, OrderId: 1, OrderPublicId: 1, OrderStatus: 1, PriceSnapshot: 1, ProductDateCreated: 1, ProductId: 1, ProductName: 1, ProductPrice: 1, ProductPublicId: 1, Quantity: 1 }, Orders: { Address: 1, CustomerCreditCard: 1, CustomerDateCreated: 1, CustomerId: 1, CustomerName: 1, CustomerPublicId: 1, CustomerUserId: 1, DateCreated: 1, OrderId: 1, PublicId: 1, Status: 1 }, Products: { DateCreated: 1, Name: 1, Price: 1, ProductId: 1, PublicId: 1 }, UsersCostumers: { DisplayName: 1, Email: 1, Id: 1, Username: 1 } } }, Forms: { Membership: { ChangePassword: { FormTitle: 1, SubmitButton: 1, Success: 1 }, ForgotPassword: { BackToLogin: 1, FormInfo: 1, FormTitle: 1, SubmitButton: 1, Success: 1 }, Login: { FacebookButton: 1, ForgotPassword: 1, FormTitle: 1, GoogleButton: 1, OR: 1, RememberMe: 1, SignInButton: 1, SignUpButton: 1 }, ResetPassword: { BackToLogin: 1, EmailSubject: 1, FormTitle: 1, SubmitButton: 1, Success: 1 }, SignUp: { AcceptTerms: 1, ActivateEmailSubject: 1, ActivationCompleteMessage: 1, BackToLogin: 1, ConfirmEmail: 1, ConfirmPassword: 1, DisplayName: 1, Email: 1, FormInfo: 1, FormTitle: 1, Password: 1, SubmitButton: 1, Success: 1 } } }, Site: { AccessDenied: { ClickToChangeUser: 1, ClickToLogin: 1, LackPermissions: 1, NotLoggedIn: 1, PageTitle: 1 }, BasicProgressDialog: { CancelTitle: 1, PleaseWait: 1 }, BulkServiceAction: { AllHadErrorsFormat: 1, AllSuccessFormat: 1, ConfirmationFormat: 1, ErrorCount: 1, NothingToProcess: 1, SomeHadErrorsFormat: 1, SuccessCount: 1 }, Dashboard: { ContentDescription: 1 }, Layout: { FooterCopyright: 1, FooterInfo: 1, FooterRights: 1, GeneralSettings: 1, Language: 1, Theme: 1, ThemeBlack: 1, ThemeBlackLight: 1, ThemeBlue: 1, ThemeBlueLight: 1, ThemeGreen: 1, ThemeGreenLight: 1, ThemePurple: 1, ThemePurpleLight: 1, ThemeRed: 1, ThemeRedLight: 1, ThemeYellow: 1, ThemeYellowLight: 1 }, RolePermissionDialog: { DialogTitle: 1, EditButton: 1, SaveSuccess: 1 }, UserDialog: { EditPermissionsButton: 1, EditRolesButton: 1 }, UserPermissionDialog: { DialogTitle: 1, Grant: 1, Permission: 1, Revoke: 1, SaveSuccess: 1 }, UserRoleDialog: { DialogTitle: 1, SaveSuccess: 1 }, ValidationError: { Title: 1 } }, Validation: { AuthenticationError: 1, CantFindUserWithEmail: 1, CurrentPasswordMismatch: 1, DeleteForeignKeyError: 1, EmailConfirm: 1, EmailInUse: 1, InvalidActivateToken: 1, InvalidResetToken: 1, MinRequiredPasswordLength: 1, SavePrimaryKeyError: 1 } });
+        SportProductApp['Texts'] = Q.proxyTexts(Texts, '', { Db: { Administration: { Language: { Id: 1, LanguageId: 1, LanguageName: 1 }, Role: { RoleId: 1, RoleName: 1 }, RolePermission: { PermissionKey: 1, RoleId: 1, RolePermissionId: 1, RoleRoleName: 1 }, Translation: { CustomText: 1, EntityPlural: 1, Key: 1, OverrideConfirmation: 1, SaveChangesButton: 1, SourceLanguage: 1, SourceText: 1, TargetLanguage: 1, TargetText: 1 }, User: { DisplayName: 1, Email: 1, InsertDate: 1, InsertUserId: 1, IsActive: 1, LastDirectoryUpdate: 1, Password: 1, PasswordConfirm: 1, PasswordHash: 1, PasswordSalt: 1, PublicId: 1, Source: 1, UpdateDate: 1, UpdateUserId: 1, UserId: 1, UserImage: 1, Username: 1 }, UserPermission: { Granted: 1, PermissionKey: 1, User: 1, UserId: 1, UserPermissionId: 1, Username: 1 }, UserRole: { RoleId: 1, User: 1, UserId: 1, UserRoleId: 1, Username: 1 } }, Common: { UserPreference: { Name: 1, PreferenceType: 1, UserId: 1, UserPreferenceId: 1, Value: 1 } }, Places: { Cities: { CityId: 1, Name: 1, ProvinceId: 1, ProvinceName: 1 }, Provinces: { Name: 1, ProvinceId: 1 } }, SportFlow: { Customers: { CreditCard: 1, CustomerId: 1, DateCreated: 1, Name: 1, PublicId: 1, UserDisplayName: 1, UserEmail: 1, UserId: 1, UserInsertDate: 1, UserInsertUserId: 1, UserIsActive: 1, UserLastDirectoryUpdate: 1, UserPasswordHash: 1, UserPasswordSalt: 1, UserPublicId: 1, UserSource: 1, UserUpdateDate: 1, UserUpdateUserId: 1, UserUserImage: 1, UserUsername: 1 }, OrderDetails: { OrderAddress: 1, OrderCustomerId: 1, OrderDateCreated: 1, OrderDetailId: 1, OrderId: 1, OrderPublicId: 1, OrderStatus: 1, PriceSnapshot: 1, ProductDateCreated: 1, ProductId: 1, ProductName: 1, ProductPrice: 1, ProductPublicId: 1, Quantity: 1 }, Orders: { Address: 1, CustomerCreditCard: 1, CustomerDateCreated: 1, CustomerId: 1, CustomerName: 1, CustomerPublicId: 1, CustomerUserId: 1, DateCreated: 1, ItemList: 1, OrderId: 1, PublicId: 1, Status: 1 }, Products: { DateCreated: 1, Name: 1, Price: 1, ProductId: 1, PublicId: 1 } } }, Forms: { Membership: { ChangePassword: { FormTitle: 1, SubmitButton: 1, Success: 1 }, ForgotPassword: { BackToLogin: 1, FormInfo: 1, FormTitle: 1, SubmitButton: 1, Success: 1 }, Login: { FacebookButton: 1, ForgotPassword: 1, FormTitle: 1, GoogleButton: 1, OR: 1, RememberMe: 1, SignInButton: 1, SignUpButton: 1 }, ResetPassword: { BackToLogin: 1, EmailSubject: 1, FormTitle: 1, SubmitButton: 1, Success: 1 }, SignUp: { AcceptTerms: 1, ActivateEmailSubject: 1, ActivationCompleteMessage: 1, BackToLogin: 1, ConfirmEmail: 1, ConfirmPassword: 1, DisplayName: 1, Email: 1, FormInfo: 1, FormTitle: 1, Password: 1, SubmitButton: 1, Success: 1 } } }, Site: { AccessDenied: { ClickToChangeUser: 1, ClickToLogin: 1, LackPermissions: 1, NotLoggedIn: 1, PageTitle: 1 }, BasicProgressDialog: { CancelTitle: 1, PleaseWait: 1 }, BulkServiceAction: { AllHadErrorsFormat: 1, AllSuccessFormat: 1, ConfirmationFormat: 1, ErrorCount: 1, NothingToProcess: 1, SomeHadErrorsFormat: 1, SuccessCount: 1 }, Dashboard: { ContentDescription: 1 }, Layout: { FooterCopyright: 1, FooterInfo: 1, FooterRights: 1, GeneralSettings: 1, Language: 1, Theme: 1, ThemeBlack: 1, ThemeBlackLight: 1, ThemeBlue: 1, ThemeBlueLight: 1, ThemeGreen: 1, ThemeGreenLight: 1, ThemePurple: 1, ThemePurpleLight: 1, ThemeRed: 1, ThemeRedLight: 1, ThemeYellow: 1, ThemeYellowLight: 1 }, RolePermissionDialog: { DialogTitle: 1, EditButton: 1, SaveSuccess: 1 }, UserDialog: { EditPermissionsButton: 1, EditRolesButton: 1 }, UserPermissionDialog: { DialogTitle: 1, Grant: 1, Permission: 1, Revoke: 1, SaveSuccess: 1 }, UserRoleDialog: { DialogTitle: 1, SaveSuccess: 1 }, ValidationError: { Title: 1 } }, Validation: { AuthenticationError: 1, CantFindUserWithEmail: 1, CurrentPasswordMismatch: 1, DeleteForeignKeyError: 1, EmailConfirm: 1, EmailInUse: 1, InvalidActivateToken: 1, InvalidResetToken: 1, MinRequiredPasswordLength: 1, SavePrimaryKeyError: 1 } });
     })(Texts = SportProductApp.Texts || (SportProductApp.Texts = {}));
 })(SportProductApp || (SportProductApp = {}));
 var SportProductApp;
@@ -3567,6 +3543,46 @@ var SportProductApp;
 (function (SportProductApp) {
     var SportFlow;
     (function (SportFlow) {
+        var OrderDetailsEditor = /** @class */ (function (_super) {
+            __extends(OrderDetailsEditor, _super);
+            function OrderDetailsEditor(container) {
+                return _super.call(this, container) || this;
+            }
+            OrderDetailsEditor.prototype.getColumnsKey = function () { return "SportFlow.OrderDetails"; };
+            OrderDetailsEditor.prototype.getDialogType = function () { return SportFlow.OrderDetailsDialog; };
+            OrderDetailsEditor.prototype.getLocalTextPrefix = function () { return SportFlow.OrderDetailsRow.localTextPrefix; };
+            OrderDetailsEditor.prototype.getAddButtonCaption = function () { return "Agregar Producto"; };
+            OrderDetailsEditor.prototype.validateEntity = function (row, id) {
+                var _a;
+                // Validar que el producto no esté duplicado
+                if (!row.ProductId) {
+                    Q.alert("Debe seleccionar un producto.");
+                    return false;
+                }
+                // Evitar productos repetidos
+                var same = Q.tryFirst(this.view.getItems(), function (x) {
+                    return x.ProductId === row.ProductId && x !== row;
+                });
+                if (same) {
+                    Q.alert("Este producto ya fue agregado.");
+                    return false;
+                }
+                // Asignar el nombre del producto al mostrarlo en la grilla
+                row.ProductName = (_a = SportFlow.ProductsRow.getLookup().itemById[row.ProductId]) === null || _a === void 0 ? void 0 : _a.Name;
+                return true;
+            };
+            OrderDetailsEditor = __decorate([
+                Serenity.Decorators.registerEditor("SportProductApp.SportFlow.OrderDetailsEditor")
+            ], OrderDetailsEditor);
+            return OrderDetailsEditor;
+        }(SportProductApp.Common.GridEditorBase));
+        SportFlow.OrderDetailsEditor = OrderDetailsEditor;
+    })(SportFlow = SportProductApp.SportFlow || (SportProductApp.SportFlow = {}));
+})(SportProductApp || (SportProductApp = {}));
+var SportProductApp;
+(function (SportProductApp) {
+    var SportFlow;
+    (function (SportFlow) {
         var OrderDetailsGrid = /** @class */ (function (_super) {
             __extends(OrderDetailsGrid, _super);
             function OrderDetailsGrid(container) {
@@ -3684,56 +3700,6 @@ var SportProductApp;
             return ProductsGrid;
         }(Serenity.EntityGrid));
         SportFlow.ProductsGrid = ProductsGrid;
-    })(SportFlow = SportProductApp.SportFlow || (SportProductApp.SportFlow = {}));
-})(SportProductApp || (SportProductApp = {}));
-var SportProductApp;
-(function (SportProductApp) {
-    var SportFlow;
-    (function (SportFlow) {
-        var UsersCostumersDialog = /** @class */ (function (_super) {
-            __extends(UsersCostumersDialog, _super);
-            function UsersCostumersDialog() {
-                var _this = _super !== null && _super.apply(this, arguments) || this;
-                _this.form = new SportFlow.UsersCostumersForm(_this.idPrefix);
-                return _this;
-            }
-            UsersCostumersDialog.prototype.getFormKey = function () { return SportFlow.UsersCostumersForm.formKey; };
-            UsersCostumersDialog.prototype.getIdProperty = function () { return SportFlow.UsersCostumersRow.idProperty; };
-            UsersCostumersDialog.prototype.getLocalTextPrefix = function () { return SportFlow.UsersCostumersRow.localTextPrefix; };
-            UsersCostumersDialog.prototype.getNameProperty = function () { return SportFlow.UsersCostumersRow.nameProperty; };
-            UsersCostumersDialog.prototype.getService = function () { return SportFlow.UsersCostumersService.baseUrl; };
-            UsersCostumersDialog.prototype.getDeletePermission = function () { return SportFlow.UsersCostumersRow.deletePermission; };
-            UsersCostumersDialog.prototype.getInsertPermission = function () { return SportFlow.UsersCostumersRow.insertPermission; };
-            UsersCostumersDialog.prototype.getUpdatePermission = function () { return SportFlow.UsersCostumersRow.updatePermission; };
-            UsersCostumersDialog = __decorate([
-                Serenity.Decorators.registerClass()
-            ], UsersCostumersDialog);
-            return UsersCostumersDialog;
-        }(Serenity.EntityDialog));
-        SportFlow.UsersCostumersDialog = UsersCostumersDialog;
-    })(SportFlow = SportProductApp.SportFlow || (SportProductApp.SportFlow = {}));
-})(SportProductApp || (SportProductApp = {}));
-var SportProductApp;
-(function (SportProductApp) {
-    var SportFlow;
-    (function (SportFlow) {
-        var UsersCostumersGrid = /** @class */ (function (_super) {
-            __extends(UsersCostumersGrid, _super);
-            function UsersCostumersGrid(container) {
-                return _super.call(this, container) || this;
-            }
-            UsersCostumersGrid.prototype.getColumnsKey = function () { return 'SportFlow.UsersCostumers'; };
-            UsersCostumersGrid.prototype.getDialogType = function () { return SportFlow.UsersCostumersDialog; };
-            UsersCostumersGrid.prototype.getIdProperty = function () { return SportFlow.UsersCostumersRow.idProperty; };
-            UsersCostumersGrid.prototype.getInsertPermission = function () { return SportFlow.UsersCostumersRow.insertPermission; };
-            UsersCostumersGrid.prototype.getLocalTextPrefix = function () { return SportFlow.UsersCostumersRow.localTextPrefix; };
-            UsersCostumersGrid.prototype.getService = function () { return SportFlow.UsersCostumersService.baseUrl; };
-            UsersCostumersGrid = __decorate([
-                Serenity.Decorators.registerClass()
-            ], UsersCostumersGrid);
-            return UsersCostumersGrid;
-        }(Serenity.EntityGrid));
-        SportFlow.UsersCostumersGrid = UsersCostumersGrid;
     })(SportFlow = SportProductApp.SportFlow || (SportProductApp.SportFlow = {}));
 })(SportProductApp || (SportProductApp = {}));
 //# sourceMappingURL=SportProductApp.Web.js.map

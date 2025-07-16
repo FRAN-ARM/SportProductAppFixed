@@ -2,6 +2,7 @@
 using System;
 namespace SportProductApp.Migrations.DefaultDB
 {
+    // Productos.
     [Migration(20250710000002)]
     public class DefaultDB_20250710_000002_Products : Migration
     {

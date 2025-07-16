@@ -5,7 +5,9 @@ namespace SportProductApp.SportFlow.Entities
     using Serenity.ComponentModel;
     using Serenity.Data;
     using Serenity.Data.Mapping;
+    using SportProductApp.SportFlow.Order.Enums;
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.IO;
 
@@ -36,11 +38,11 @@ namespace SportProductApp.SportFlow.Entities
             set { Fields.CustomerId[this] = value; }
         }
 
-        [DisplayName("Status"), Size(50), NotNull]
-        public String Status
+        [DisplayName("Status"), Size(50), NotNull, DefaultValue(OrderStatusKind.Pending)]
+        public OrderStatusKind Status
         {
-            get { return Fields.Status[this]; }
-            set { Fields.Status[this] = value; }
+            get { return (OrderStatusKind)(OrderStatusKind?)Fields.Status[this]; }
+            set { Fields.Status[this] = (Int32?)value; }
         }
 
         [DisplayName("Address"), Size(248), NotNull]
@@ -50,7 +52,7 @@ namespace SportProductApp.SportFlow.Entities
             set { Fields.Address[this] = value; }
         }
 
-        [DisplayName("Date Created"), NotNull]
+        [DisplayName("Date Created"), NotNull, ReadOnly(true)]
         public DateTime? DateCreated
         {
             get { return Fields.DateCreated[this]; }
@@ -92,6 +94,14 @@ namespace SportProductApp.SportFlow.Entities
             set { Fields.CustomerDateCreated[this] = value; }
         }
 
+        [DisplayName("Items"), MasterDetailRelation(foreignKey: "OrderId"), NotMapped]
+        public List<OrderDetailsRow> ItemList
+        {
+            get => Fields.ItemList[this];
+            set => Fields.ItemList[this] = value;
+        }
+
+
         IIdField IIdRow.IdField
         {
             get { return Fields.OrderId; }
@@ -114,7 +124,7 @@ namespace SportProductApp.SportFlow.Entities
             public Int32Field OrderId;
             public StringField PublicId;
             public Int32Field CustomerId;
-            public StringField Status;
+            public Int32Field Status;
             public StringField Address;
             public DateTimeField DateCreated;
 
@@ -123,6 +133,9 @@ namespace SportProductApp.SportFlow.Entities
             public StringField CustomerName;
             public StringField CustomerCreditCard;
             public DateTimeField CustomerDateCreated;
+            public RowListField<OrderDetailsRow> ItemList;
+            public Int32? ProvinceId { get; set; }
+            public Int32? CityId { get; set; }
         }
     }
 }

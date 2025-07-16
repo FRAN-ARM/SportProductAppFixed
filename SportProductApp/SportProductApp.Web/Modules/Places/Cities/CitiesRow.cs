@@ -13,6 +13,7 @@ namespace SportProductApp.Places.Entities
     [DisplayName("Cities"), InstanceName("Cities")]
     [ReadPermission("Administration:General")]
     [ModifyPermission("Administration:General")]
+    [LookupScript("Places.Cities")]
     public sealed class CitiesRow : Row, IIdRow, INameRow
     {
         [DisplayName("City Id"), Identity]
@@ -23,6 +24,7 @@ namespace SportProductApp.Places.Entities
         }
 
         [DisplayName("Province"), NotNull, ForeignKey("[dbo].[Provinces]", "ProvinceId"), LeftJoin("jProvince"), TextualField("ProvinceName")]
+        [LookupInclude]
         public Int32? ProvinceId
         {
             get { return Fields.ProvinceId[this]; }

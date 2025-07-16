@@ -2,6 +2,7 @@
 using System;
 namespace SportProductApp.Migrations.DefaultDB
 {
+    // Ordenes de los clientes.
     [Migration(20250710000003)]
     public class DefaultDB_20250710_000003_Orders : Migration
     {

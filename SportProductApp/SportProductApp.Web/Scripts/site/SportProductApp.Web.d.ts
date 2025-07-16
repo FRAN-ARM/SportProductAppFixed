@@ -579,6 +579,8 @@ declare namespace SportProductApp.Places {
         const idProperty = "CityId";
         const nameProperty = "Name";
         const localTextPrefix = "Places.Cities";
+        const lookupKey = "Places.Cities";
+        function getLookup(): Q.Lookup<CitiesRow>;
         const deletePermission = "Administration:General";
         const insertPermission = "Administration:General";
         const readPermission = "Administration:General";
@@ -629,6 +631,8 @@ declare namespace SportProductApp.Places {
         const idProperty = "ProvinceId";
         const nameProperty = "Name";
         const localTextPrefix = "Places.Provinces";
+        const lookupKey = "Places.Provinces";
+        function getLookup(): Q.Lookup<ProvincesRow>;
         const deletePermission = "Administration:General";
         const insertPermission = "Administration:General";
         const readPermission = "Administration:General";
@@ -759,6 +763,13 @@ declare namespace SportProductApp.SportFlow {
         }
     }
 }
+declare namespace SportProductApp.SportFlow.Order.Enums {
+    enum OrderStatusKind {
+        Pending = 0,
+        Canceled = 1,
+        Completed = 2
+    }
+}
 declare namespace SportProductApp.SportFlow {
 }
 declare namespace SportProductApp.SportFlow {
@@ -839,8 +850,10 @@ declare namespace SportProductApp.SportFlow {
     interface OrdersForm {
         PublicId: Serenity.StringEditor;
         CustomerId: Serenity.IntegerEditor;
-        Status: Serenity.StringEditor;
-        Address: Serenity.StringEditor;
+        Status: Serenity.EnumEditor;
+        ProvinceId: Serenity.LookupEditor;
+        CityId: Serenity.LookupEditor;
+        ItemList: OrderDetailsEditor;
         DateCreated: Serenity.DateEditor;
     }
     class OrdersForm extends Serenity.PrefixedContext {
@@ -854,7 +867,7 @@ declare namespace SportProductApp.SportFlow {
         OrderId?: number;
         PublicId?: string;
         CustomerId?: number;
-        Status?: string;
+        Status?: SportFlow.Order.Enums.OrderStatusKind;
         Address?: string;
         DateCreated?: string;
         CustomerPublicId?: string;
@@ -862,6 +875,7 @@ declare namespace SportProductApp.SportFlow {
         CustomerName?: string;
         CustomerCreditCard?: string;
         CustomerDateCreated?: string;
+        ItemList?: OrderDetailsRow[];
     }
     namespace OrdersRow {
         const idProperty = "OrderId";
@@ -882,7 +896,8 @@ declare namespace SportProductApp.SportFlow {
             CustomerUserId = "CustomerUserId",
             CustomerName = "CustomerName",
             CustomerCreditCard = "CustomerCreditCard",
-            CustomerDateCreated = "CustomerDateCreated"
+            CustomerDateCreated = "CustomerDateCreated",
+            ItemList = "ItemList"
         }
     }
 }
@@ -930,6 +945,8 @@ declare namespace SportProductApp.SportFlow {
         const idProperty = "ProductId";
         const nameProperty = "PublicId";
         const localTextPrefix = "SportFlow.Products";
+        const lookupKey = "SportFlow.Products";
+        function getLookup(): Q.Lookup<ProductsRow>;
         const deletePermission = "Administration:General";
         const insertPermission = "Administration:General";
         const readPermission = "Administration:General";
@@ -957,65 +974,6 @@ declare namespace SportProductApp.SportFlow {
             Delete = "SportFlow/Products/Delete",
             Retrieve = "SportFlow/Products/Retrieve",
             List = "SportFlow/Products/List"
-        }
-    }
-}
-declare namespace SportProductApp.SportFlow.UsersCostumers {
-    interface UsersCustomersRequest extends Serenity.ServiceRequest {
-        Form?: UsersCostumersForm;
-    }
-}
-declare namespace SportProductApp.SportFlow {
-}
-declare namespace SportProductApp.SportFlow {
-    interface UsersCostumersForm {
-        Username: Serenity.StringEditor;
-        DisplayName: Serenity.StringEditor;
-        Email: Serenity.StringEditor;
-    }
-    class UsersCostumersForm extends Serenity.PrefixedContext {
-        static formKey: string;
-        private static init;
-        constructor(prefix: string);
-    }
-}
-declare namespace SportProductApp.SportFlow {
-    interface UsersCostumersRow {
-        Id?: number;
-        Username?: string;
-        DisplayName?: string;
-        Email?: string;
-    }
-    namespace UsersCostumersRow {
-        const idProperty = "Id";
-        const nameProperty = "Username";
-        const localTextPrefix = "SportFlow.UsersCostumers";
-        const deletePermission = "Administration:General";
-        const insertPermission = "Administration:General";
-        const readPermission = "Administration:General";
-        const updatePermission = "Administration:General";
-        const enum Fields {
-            Id = "Id",
-            Username = "Username",
-            DisplayName = "DisplayName",
-            Email = "Email"
-        }
-    }
-}
-declare namespace SportProductApp.SportFlow {
-    namespace UsersCostumersService {
-        const baseUrl = "SportFlow/UsersCostumers";
-        function Create(request: SportFlow.UsersCostumers.UsersCustomersRequest, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function Update(request: Serenity.SaveRequest<UsersCostumersRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<UsersCostumersRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<UsersCostumersRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        const enum Methods {
-            Create = "SportFlow/UsersCostumers/Create",
-            Update = "SportFlow/UsersCostumers/Update",
-            Delete = "SportFlow/UsersCostumers/Delete",
-            Retrieve = "SportFlow/UsersCostumers/Retrieve",
-            List = "SportFlow/UsersCostumers/List"
         }
     }
 }
@@ -1574,6 +1532,16 @@ declare namespace SportProductApp.SportFlow {
     }
 }
 declare namespace SportProductApp.SportFlow {
+    class OrderDetailsEditor extends SportProductApp.Common.GridEditorBase<OrderDetailsRow> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof OrderDetailsDialog;
+        protected getLocalTextPrefix(): string;
+        protected getAddButtonCaption(): string;
+        protected validateEntity(row: OrderDetailsRow, id: number): boolean;
+        constructor(container: JQuery);
+    }
+}
+declare namespace SportProductApp.SportFlow {
     class OrderDetailsGrid extends Serenity.EntityGrid<OrderDetailsRow, any> {
         protected getColumnsKey(): string;
         protected getDialogType(): typeof OrderDetailsDialog;
@@ -1625,30 +1593,6 @@ declare namespace SportProductApp.SportFlow {
     class ProductsGrid extends Serenity.EntityGrid<ProductsRow, any> {
         protected getColumnsKey(): string;
         protected getDialogType(): typeof ProductsDialog;
-        protected getIdProperty(): string;
-        protected getInsertPermission(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        constructor(container: JQuery);
-    }
-}
-declare namespace SportProductApp.SportFlow {
-    class UsersCostumersDialog extends Serenity.EntityDialog<UsersCostumersRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected getDeletePermission(): string;
-        protected getInsertPermission(): string;
-        protected getUpdatePermission(): string;
-        protected form: UsersCostumersForm;
-    }
-}
-declare namespace SportProductApp.SportFlow {
-    class UsersCostumersGrid extends Serenity.EntityGrid<UsersCostumersRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof UsersCostumersDialog;
         protected getIdProperty(): string;
         protected getInsertPermission(): string;
         protected getLocalTextPrefix(): string;

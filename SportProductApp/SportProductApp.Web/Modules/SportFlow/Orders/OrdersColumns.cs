@@ -18,7 +18,7 @@ namespace SportProductApp.SportFlow.Columns
         [EditLink]
         public String PublicId { get; set; }
         public String CustomerPublicId { get; set; }
-        public String Status { get; set; }
+        public Int32 Status { get; set; }
         public String Address { get; set; }
         public DateTime DateCreated { get; set; }
     }

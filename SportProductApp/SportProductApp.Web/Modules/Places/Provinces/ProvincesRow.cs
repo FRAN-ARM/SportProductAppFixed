@@ -13,6 +13,7 @@ namespace SportProductApp.Places.Entities
     [DisplayName("Provinces"), InstanceName("Provinces")]
     [ReadPermission("Administration:General")]
     [ModifyPermission("Administration:General")]
+    [LookupScript]
     public sealed class ProvincesRow : Row, IIdRow, INameRow
     {
         [DisplayName("Province Id"), Identity]

@@ -3,8 +3,11 @@ namespace SportProductApp.SportFlow.Repositories
 {
     using Serenity;
     using Serenity.Data;
+    using Serenity.Data.Mapping;
     using Serenity.Services;
+    using SportProductApp.SportFlow.Entities;
     using System;
+    using System.Collections.Generic;
     using System.Data;
     using MyRow = Entities.OrdersRow;
 
@@ -37,7 +40,10 @@ namespace SportProductApp.SportFlow.Repositories
             return new MyListHandler().Process(connection, request);
         }
 
-        private class MySaveHandler : SaveRequestHandler<MyRow> { }
+        private class MySaveHandler : SaveRequestHandler<MyRow> {
+            [MasterDetailRelation(foreignKey: "OrderId", IncludeColumns = "ProductId, Quantity, PriceSnapshot")]
+            public List<OrderDetailsRow> ItemList => Row.ItemList;
+        }
         private class MyDeleteHandler : DeleteRequestHandler<MyRow> { }
         private class MyRetrieveHandler : RetrieveRequestHandler<MyRow> { }
         private class MyListHandler : ListRequestHandler<MyRow> { }

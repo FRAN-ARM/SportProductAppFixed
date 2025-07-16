@@ -2,8 +2,10 @@
     export interface OrdersForm {
         PublicId: Serenity.StringEditor;
         CustomerId: Serenity.IntegerEditor;
-        Status: Serenity.StringEditor;
-        Address: Serenity.StringEditor;
+        Status: Serenity.EnumEditor;
+        ProvinceId: Serenity.LookupEditor;
+        CityId: Serenity.LookupEditor;
+        ItemList: OrderDetailsEditor;
         DateCreated: Serenity.DateEditor;
     }
 
@@ -20,14 +22,19 @@
                 var s = Serenity;
                 var w0 = s.StringEditor;
                 var w1 = s.IntegerEditor;
-                var w2 = s.DateEditor;
+                var w2 = s.EnumEditor;
+                var w3 = s.LookupEditor;
+                var w4 = OrderDetailsEditor;
+                var w5 = s.DateEditor;
 
                 Q.initFormType(OrdersForm, [
                     'PublicId', w0,
                     'CustomerId', w1,
-                    'Status', w0,
-                    'Address', w0,
-                    'DateCreated', w2
+                    'Status', w2,
+                    'ProvinceId', w3,
+                    'CityId', w3,
+                    'ItemList', w4,
+                    'DateCreated', w5
                 ]);
             }
         }
