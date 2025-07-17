@@ -4,7 +4,7 @@
     }
 
     export class ProvincesForm extends Serenity.PrefixedContext {
-        static formKey = 'Places.Provinces';
+        static formKey = 'Places.ProvincesForm';
         private static init: boolean;
 
         constructor(prefix: string) {

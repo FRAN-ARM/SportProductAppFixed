@@ -9,7 +9,7 @@ namespace SportProductApp.SportFlow.Columns
     using System.Collections.Generic;
     using System.IO;
 
-    [ColumnsScript("SportFlow.OrderDetails")]
+    [ColumnsScript("SportFlow.OrderDetailsColumns")]
     [BasedOnRow(typeof(Entities.OrderDetailsRow), CheckNames = true)]
     public class OrderDetailsColumns
     {

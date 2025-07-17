@@ -5,11 +5,13 @@ namespace SportProductApp.Administration.Repositories
     using Serenity.Data;
     using Serenity.Services;
     using Serenity.Web.Providers;
+    using SportProductApp.Administration.Entities;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Configuration;
     using System.Data;
+    using System.Linq;
     using System.Web.Security;
     using MyRow = Entities.UserRow;
     using UserPreferenceRow = Common.Entities.UserPreferenceRow;
@@ -223,11 +225,33 @@ namespace SportProductApp.Administration.Repositories
                     Row.PasswordSalt = salt;
                 }
             }
+            private void AssignDefaultRoleAndPermissions()
+            {
+                var userId = Row.UserId.Value;
 
+                // Queremos verificar la existencia del rol.
+                var roleId = Connection.Query<int?>("SELECT RoleId FROM Roles WHERE RoleName = @0", "Customer").FirstOrDefault();
+
+                // Si existe, procedemos con las asignaciones.
+                if (roleId != null)
+                {
+                    Connection.Insert(new UserRoleRow
+                    {
+                        UserId = userId,
+                        RoleId = roleId.Value
+                    });
+                    Connection.Insert(new UserPermissionRow
+                    {
+                        UserId = userId,
+                        PermissionKey = "Dashboard:Customer",
+                        Granted = true
+                    });
+                }
+            }
             protected override void AfterSave()
             {
                 base.AfterSave();
-
+                AssignDefaultRoleAndPermissions();
                 BatchGenerationUpdater.OnCommit(this.UnitOfWork, fld.GenerationKey);
             }
         }

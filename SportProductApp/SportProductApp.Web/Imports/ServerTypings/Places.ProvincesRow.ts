@@ -8,10 +8,10 @@
         export const idProperty = 'ProvinceId';
         export const nameProperty = 'Name';
         export const localTextPrefix = 'Places.Provinces';
-        export const lookupKey = 'Places.Provinces';
+        export const lookupKey = 'Places.ProvincesRow';
 
         export function getLookup(): Q.Lookup<ProvincesRow> {
-            return Q.getLookup<ProvincesRow>('Places.Provinces');
+            return Q.getLookup<ProvincesRow>('Places.ProvincesRow');
         }
         export const deletePermission = 'Administration:General';
         export const insertPermission = 'Administration:General';

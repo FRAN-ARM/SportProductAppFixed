@@ -502,6 +502,15 @@ var SportProductApp;
 })(SportProductApp || (SportProductApp = {}));
 var SportProductApp;
 (function (SportProductApp) {
+    var Modules;
+    (function (Modules) {
+        var SportFlow;
+        (function (SportFlow) {
+        })(SportFlow = Modules.SportFlow || (Modules.SportFlow = {}));
+    })(Modules = SportProductApp.Modules || (SportProductApp.Modules = {}));
+})(SportProductApp || (SportProductApp = {}));
+var SportProductApp;
+(function (SportProductApp) {
     var Places;
     (function (Places) {
         var CitiesForm = /** @class */ (function (_super) {
@@ -520,7 +529,7 @@ var SportProductApp;
                 }
                 return _this;
             }
-            CitiesForm.formKey = 'Places.Cities';
+            CitiesForm.formKey = 'Places.CitiesForm';
             return CitiesForm;
         }(Serenity.PrefixedContext));
         Places.CitiesForm = CitiesForm;
@@ -535,9 +544,9 @@ var SportProductApp;
             CitiesRow.idProperty = 'CityId';
             CitiesRow.nameProperty = 'Name';
             CitiesRow.localTextPrefix = 'Places.Cities';
-            CitiesRow.lookupKey = 'Places.Cities';
+            CitiesRow.lookupKey = 'Places.CitiesRow';
             function getLookup() {
-                return Q.getLookup('Places.Cities');
+                return Q.getLookup('Places.CitiesRow');
             }
             CitiesRow.getLookup = getLookup;
             CitiesRow.deletePermission = 'Administration:General';
@@ -586,7 +595,7 @@ var SportProductApp;
                 }
                 return _this;
             }
-            ProvincesForm.formKey = 'Places.Provinces';
+            ProvincesForm.formKey = 'Places.ProvincesForm';
             return ProvincesForm;
         }(Serenity.PrefixedContext));
         Places.ProvincesForm = ProvincesForm;
@@ -601,9 +610,9 @@ var SportProductApp;
             ProvincesRow.idProperty = 'ProvinceId';
             ProvincesRow.nameProperty = 'Name';
             ProvincesRow.localTextPrefix = 'Places.Provinces';
-            ProvincesRow.lookupKey = 'Places.Provinces';
+            ProvincesRow.lookupKey = 'Places.ProvincesRow';
             function getLookup() {
-                return Q.getLookup('Places.Provinces');
+                return Q.getLookup('Places.ProvincesRow');
             }
             ProvincesRow.getLookup = getLookup;
             ProvincesRow.deletePermission = 'Administration:General';
@@ -658,7 +667,7 @@ var SportProductApp;
                 }
                 return _this;
             }
-            CustomersForm.formKey = 'SportFlow.Customers';
+            CustomersForm.formKey = 'SportFlow.CustomersForm';
             return CustomersForm;
         }(Serenity.PrefixedContext));
         SportFlow.CustomersForm = CustomersForm;
@@ -673,9 +682,9 @@ var SportProductApp;
             CustomersRow.idProperty = 'CustomerId';
             CustomersRow.nameProperty = 'PublicId';
             CustomersRow.localTextPrefix = 'SportFlow.Customers';
-            CustomersRow.lookupKey = 'SportFlow.Customers';
+            CustomersRow.lookupKey = 'SportFlow.CustomersRow';
             function getLookup() {
-                return Q.getLookup('SportFlow.Customers');
+                return Q.getLookup('SportFlow.CustomersRow');
             }
             CustomersRow.getLookup = getLookup;
             CustomersRow.deletePermission = 'Administration:General';
@@ -736,18 +745,19 @@ var SportProductApp;
                 if (!OrderDetailsForm.init) {
                     OrderDetailsForm.init = true;
                     var s = Serenity;
-                    var w0 = s.IntegerEditor;
-                    var w1 = s.DecimalEditor;
+                    var w0 = s.LookupEditor;
+                    var w1 = s.IntegerEditor;
+                    var w2 = s.DecimalEditor;
                     Q.initFormType(OrderDetailsForm, [
                         'OrderId', w0,
                         'ProductId', w0,
-                        'Quantity', w0,
-                        'PriceSnapshot', w1
+                        'Quantity', w1,
+                        'PriceSnapshot', w2
                     ]);
                 }
                 return _this;
             }
-            OrderDetailsForm.formKey = 'SportFlow.OrderDetails';
+            OrderDetailsForm.formKey = 'SportFlow.OrderDetailsForm';
             return OrderDetailsForm;
         }(Serenity.PrefixedContext));
         SportFlow.OrderDetailsForm = OrderDetailsForm;
@@ -818,7 +828,7 @@ var SportProductApp;
                 }
                 return _this;
             }
-            OrdersForm.formKey = 'SportFlow.Orders';
+            OrdersForm.formKey = 'SportFlow.OrdersForm';
             return OrdersForm;
         }(Serenity.PrefixedContext));
         SportFlow.OrdersForm = OrdersForm;
@@ -833,10 +843,15 @@ var SportProductApp;
             OrdersRow.idProperty = 'OrderId';
             OrdersRow.nameProperty = 'PublicId';
             OrdersRow.localTextPrefix = 'SportFlow.Orders';
-            OrdersRow.deletePermission = 'Administration:General';
-            OrdersRow.insertPermission = 'Administration:General';
-            OrdersRow.readPermission = 'Administration:General';
-            OrdersRow.updatePermission = 'Administration:General';
+            OrdersRow.lookupKey = 'SportFlow.OrdersRow';
+            function getLookup() {
+                return Q.getLookup('SportFlow.OrdersRow');
+            }
+            OrdersRow.getLookup = getLookup;
+            OrdersRow.deletePermission = 'Customers:General';
+            OrdersRow.insertPermission = 'Customers:General';
+            OrdersRow.readPermission = 'Customers:General';
+            OrdersRow.updatePermission = 'Customers:General';
         })(OrdersRow = SportFlow.OrdersRow || (SportFlow.OrdersRow = {}));
     })(SportFlow = SportProductApp.SportFlow || (SportProductApp.SportFlow = {}));
 })(SportProductApp || (SportProductApp = {}));
@@ -884,7 +899,7 @@ var SportProductApp;
                 }
                 return _this;
             }
-            ProductsForm.formKey = 'SportFlow.Products';
+            ProductsForm.formKey = 'SportFlow.ProductsForm';
             return ProductsForm;
         }(Serenity.PrefixedContext));
         SportFlow.ProductsForm = ProductsForm;
@@ -899,9 +914,9 @@ var SportProductApp;
             ProductsRow.idProperty = 'ProductId';
             ProductsRow.nameProperty = 'PublicId';
             ProductsRow.localTextPrefix = 'SportFlow.Products';
-            ProductsRow.lookupKey = 'SportFlow.Products';
+            ProductsRow.lookupKey = 'SportFlow.ProductsRow';
             function getLookup() {
-                return Q.getLookup('SportFlow.Products');
+                return Q.getLookup('SportFlow.ProductsRow');
             }
             ProductsRow.getLookup = getLookup;
             ProductsRow.deletePermission = 'Administration:General';
@@ -3397,7 +3412,7 @@ var SportProductApp;
             function CitiesGrid(container) {
                 return _super.call(this, container) || this;
             }
-            CitiesGrid.prototype.getColumnsKey = function () { return 'Places.Cities'; };
+            CitiesGrid.prototype.getColumnsKey = function () { return 'Places.CitiesColumns'; };
             CitiesGrid.prototype.getDialogType = function () { return Places.CitiesDialog; };
             CitiesGrid.prototype.getIdProperty = function () { return Places.CitiesRow.idProperty; };
             CitiesGrid.prototype.getInsertPermission = function () { return Places.CitiesRow.insertPermission; };
@@ -3447,7 +3462,7 @@ var SportProductApp;
             function ProvincesGrid(container) {
                 return _super.call(this, container) || this;
             }
-            ProvincesGrid.prototype.getColumnsKey = function () { return 'Places.Provinces'; };
+            ProvincesGrid.prototype.getColumnsKey = function () { return 'Places.ProvincesColumns'; };
             ProvincesGrid.prototype.getDialogType = function () { return Places.ProvincesDialog; };
             ProvincesGrid.prototype.getIdProperty = function () { return Places.ProvincesRow.idProperty; };
             ProvincesGrid.prototype.getInsertPermission = function () { return Places.ProvincesRow.insertPermission; };
@@ -3504,7 +3519,7 @@ var SportProductApp;
             function CustomersGrid(container) {
                 return _super.call(this, container) || this;
             }
-            CustomersGrid.prototype.getColumnsKey = function () { return 'SportFlow.Customers'; };
+            CustomersGrid.prototype.getColumnsKey = function () { return 'SportFlow.CustomersColumns'; };
             CustomersGrid.prototype.getDialogType = function () { return SportFlow.CustomersDialog; };
             CustomersGrid.prototype.getIdProperty = function () { return SportFlow.CustomersRow.idProperty; };
             CustomersGrid.prototype.getInsertPermission = function () { return SportFlow.CustomersRow.insertPermission; };
@@ -3553,7 +3568,7 @@ var SportProductApp;
             function OrderDetailsEditor(container) {
                 return _super.call(this, container) || this;
             }
-            OrderDetailsEditor.prototype.getColumnsKey = function () { return "SportFlow.OrderDetails"; };
+            OrderDetailsEditor.prototype.getColumnsKey = function () { return "SportFlow.OrderDetailsColumns"; };
             OrderDetailsEditor.prototype.getDialogType = function () { return SportFlow.OrderDetailsDialog; };
             OrderDetailsEditor.prototype.getLocalTextPrefix = function () { return SportFlow.OrderDetailsRow.localTextPrefix; };
             OrderDetailsEditor.prototype.getAddButtonCaption = function () { return "Agregar Producto"; };
@@ -3593,7 +3608,7 @@ var SportProductApp;
             function OrderDetailsGrid(container) {
                 return _super.call(this, container) || this;
             }
-            OrderDetailsGrid.prototype.getColumnsKey = function () { return 'SportFlow.OrderDetails'; };
+            OrderDetailsGrid.prototype.getColumnsKey = function () { return 'SportFlow.OrderDetailsColumns'; };
             OrderDetailsGrid.prototype.getDialogType = function () { return SportFlow.OrderDetailsDialog; };
             OrderDetailsGrid.prototype.getIdProperty = function () { return SportFlow.OrderDetailsRow.idProperty; };
             OrderDetailsGrid.prototype.getInsertPermission = function () { return SportFlow.OrderDetailsRow.insertPermission; };
@@ -3652,7 +3667,7 @@ var SportProductApp;
             function OrdersGrid(container) {
                 return _super.call(this, container) || this;
             }
-            OrdersGrid.prototype.getColumnsKey = function () { return 'SportFlow.Orders'; };
+            OrdersGrid.prototype.getColumnsKey = function () { return 'SportFlow.OrdersColumns'; };
             OrdersGrid.prototype.getDialogType = function () { return SportFlow.OrdersDialog; };
             OrdersGrid.prototype.getIdProperty = function () { return SportFlow.OrdersRow.idProperty; };
             OrdersGrid.prototype.getInsertPermission = function () { return SportFlow.OrdersRow.insertPermission; };
@@ -3702,7 +3717,7 @@ var SportProductApp;
             function ProductsGrid(container) {
                 return _super.call(this, container) || this;
             }
-            ProductsGrid.prototype.getColumnsKey = function () { return 'SportFlow.Products'; };
+            ProductsGrid.prototype.getColumnsKey = function () { return 'SportFlow.ProductsColumns'; };
             ProductsGrid.prototype.getDialogType = function () { return SportFlow.ProductsDialog; };
             ProductsGrid.prototype.getIdProperty = function () { return SportFlow.ProductsRow.idProperty; };
             ProductsGrid.prototype.getInsertPermission = function () { return SportFlow.ProductsRow.insertPermission; };

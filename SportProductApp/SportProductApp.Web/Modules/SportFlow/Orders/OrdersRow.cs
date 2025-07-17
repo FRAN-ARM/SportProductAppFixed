@@ -13,8 +13,9 @@ namespace SportProductApp.SportFlow.Entities
 
     [ConnectionKey("Default"), Module("SportFlow"), TableName("[dbo].[Orders]")]
     [DisplayName("Orders"), InstanceName("Orders")]
-    [ReadPermission("Administration:General")]
-    [ModifyPermission("Administration:General")]
+    [ReadPermission("Customers:General")]
+    [ModifyPermission("Customers:General")]
+    [LookupScript("SportFlow.OrdersRow")]
     public sealed class OrdersRow : Row, IIdRow, INameRow
     {
         [DisplayName("Order Id"), Identity]

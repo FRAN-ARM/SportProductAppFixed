@@ -1059,6 +1059,9 @@
     <TypeScriptCompile Include="Imports\ServerTypings\Administration.PermissionKeys.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\Modules.SportFlow.PermissionKeys.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Imports\ServerTypings\Places.CitiesColumns.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
@@ -1092,6 +1095,7 @@
       <DependentUpon>ClientTypes.tt</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DefaultDB\DefaultDB_20250710_000008_OrdersChangeTypeStatus.cs" />
+    <Compile Include="Modules\Common\UserManagment\UserRoleAndPermissionHelper.cs" />
     <Compile Include="Modules\Places\Cities\CitiesLookup.cs" />
     <Compile Include="Modules\SportFlow\OrderDetails\OrderDetailsEditorAttribute.cs" />
     <TypeScriptCompile Include="node_modules\%40types\jquery\index.d.ts" />
@@ -1841,6 +1845,7 @@
     <Compile Include="Modules\Common\Helpers\GetNextNumberRequest.cs" />
     <Compile Include="Modules\SportFlow\Customers\CustomersRequest.cs" />
     <Compile Include="Modules\SportFlow\Orders\OrderStatus.cs" />
+    <Compile Include="Modules\SportFlow\SportFlowPermissionKeys.cs" />
     <Compile Include="Modules\Texts.cs" />
     <Compile Include="Modules\Membership\Account\AccountPage.cs" />
     <Compile Include="Modules\Administration\User\Authentication\AuthorizationService.cs" />

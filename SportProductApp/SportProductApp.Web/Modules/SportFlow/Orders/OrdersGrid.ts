@@ -3,7 +3,7 @@ namespace SportProductApp.SportFlow {
 
     @Serenity.Decorators.registerClass()
     export class OrdersGrid extends Serenity.EntityGrid<OrdersRow, any> {
-        protected getColumnsKey() { return 'SportFlow.Orders'; }
+        protected getColumnsKey() { return 'SportFlow.OrdersColumns'; }
         protected getDialogType() { return OrdersDialog; }
         protected getIdProperty() { return OrdersRow.idProperty; }
         protected getInsertPermission() { return OrdersRow.insertPermission; }

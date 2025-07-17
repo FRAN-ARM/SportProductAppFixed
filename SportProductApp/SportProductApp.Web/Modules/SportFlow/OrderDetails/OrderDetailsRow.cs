@@ -36,20 +36,6 @@ namespace SportProductApp.SportFlow.Entities
             set { Fields.ProductId[this] = value; }
         }
 
-        [DisplayName("Order Public Id"), Expression("jOrder.[PublicId]")]
-        public String OrderPublicId
-        {
-            get { return Fields.OrderPublicId[this]; }
-            set { Fields.OrderPublicId[this] = value; }
-        }
-
-        [DisplayName("Product Public Id"), Expression("jProduct.[PublicId]")]
-        public String ProductPublicId
-        {
-            get { return Fields.ProductPublicId[this]; }
-            set { Fields.ProductPublicId[this] = value; }
-        }
-
         [DisplayName("Quantity"), NotNull]
         public Int32? Quantity
         {

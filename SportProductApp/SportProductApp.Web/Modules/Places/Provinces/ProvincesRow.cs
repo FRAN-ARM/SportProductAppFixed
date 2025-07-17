@@ -1,4 +1,4 @@
-﻿
+
 namespace SportProductApp.Places.Entities
 {
     using Serenity;
@@ -13,7 +13,7 @@ namespace SportProductApp.Places.Entities
     [DisplayName("Provinces"), InstanceName("Provinces")]
     [ReadPermission("Administration:General")]
     [ModifyPermission("Administration:General")]
-    [LookupScript]
+    [LookupScript("Places.ProvincesRow")]
     public sealed class ProvincesRow : Row, IIdRow, INameRow
     {
         [DisplayName("Province Id"), Identity]

@@ -9,7 +9,7 @@ namespace SportProductApp.SportFlow.Forms
     using System.Collections.Generic;
     using System.IO;
 
-    [FormScript("SportFlow.Customers")]
+    [FormScript("SportFlow.CustomersForm")]
     public class CustomersForm
     {
         /*[StaticTextBlock(HideLabel = true, IsHtml = true, Text = "<h4 class='text-blue'>Welcome to Order Wizard!</h4>"]
@@ -26,7 +26,7 @@ namespace SportProductApp.SportFlow.Forms
         [Required, EmailEditor, MaxLength(100)]
         public String UserEmail { get; set; }
 
-        [DisplayName("Credit Card")]
+        [Required, DisplayName("Credit Card"), MaxLength(64)]
         public String CreditCard { get; set; }
 
         [DisplayName("Creation Date"), ReadOnly(true), Width(200)]

@@ -13,7 +13,7 @@ namespace SportProductApp.SportFlow.Entities
     [DisplayName("Customer"), InstanceName("Customer")]
     [ReadPermission("Administration:General")]
     [ModifyPermission("Administration:General")]
-    [LookupScript]
+    [LookupScript("SportFlow.CustomersRow")]
     public sealed class CustomersRow : Row, IIdRow, INameRow
     {
         [DisplayName("Customer Id"), Identity]

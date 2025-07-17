@@ -1,4 +1,4 @@
-﻿
+
 namespace SportProductApp.Places.Forms
 {
     using Serenity;
@@ -10,7 +10,7 @@ namespace SportProductApp.Places.Forms
     using System.IO;
     using SportProductApp.Places.Entities;
 
-    [FormScript("Places.Provinces")]
+    [FormScript("Places.ProvincesForm")]
     [BasedOnRow(typeof(ProvincesRow), CheckNames = true)]
     public class ProvincesForm
     {

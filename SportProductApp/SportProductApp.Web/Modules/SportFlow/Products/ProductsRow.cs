@@ -13,7 +13,7 @@ namespace SportProductApp.SportFlow.Entities
     [DisplayName("Products"), InstanceName("Products")]
     [ReadPermission("Administration:General")]
     [ModifyPermission("Administration:General")]
-    [LookupScript("SportFlow.Products")]
+    [LookupScript("SportFlow.ProductsRow")]
     public sealed class ProductsRow : Row, IIdRow, INameRow
     {
         [DisplayName("Product Id"), Identity]

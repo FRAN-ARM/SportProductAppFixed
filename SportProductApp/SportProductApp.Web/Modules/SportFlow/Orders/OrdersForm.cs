@@ -12,7 +12,7 @@ namespace SportProductApp.SportFlow.Forms
     using SportProductApp.SportFlow.Order.Enums;
     using SportProductApp.Places.Entities;
 
-    [FormScript("SportFlow.Orders")]
+    [FormScript("SportFlow.OrdersForm")]
     /*[BasedOnRow(typeof(Entities.OrdersRow), CheckNames = true)]*/
     public class OrdersForm
     {

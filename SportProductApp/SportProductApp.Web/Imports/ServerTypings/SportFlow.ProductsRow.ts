@@ -11,10 +11,10 @@
         export const idProperty = 'ProductId';
         export const nameProperty = 'PublicId';
         export const localTextPrefix = 'SportFlow.Products';
-        export const lookupKey = 'SportFlow.Products';
+        export const lookupKey = 'SportFlow.ProductsRow';
 
         export function getLookup(): Q.Lookup<ProductsRow> {
-            return Q.getLookup<ProductsRow>('SportFlow.Products');
+            return Q.getLookup<ProductsRow>('SportFlow.ProductsRow');
         }
         export const deletePermission = 'Administration:General';
         export const insertPermission = 'Administration:General';

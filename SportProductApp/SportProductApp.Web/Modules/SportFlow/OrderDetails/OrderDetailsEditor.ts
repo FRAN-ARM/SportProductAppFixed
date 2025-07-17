@@ -4,7 +4,7 @@ namespace SportProductApp.SportFlow {
     @Serenity.Decorators.registerEditor("SportProductApp.SportFlow.OrderDetailsEditor")
     export class OrderDetailsEditor extends SportProductApp.Common.GridEditorBase<OrderDetailsRow> {
 
-        protected getColumnsKey() { return "SportFlow.OrderDetails"; }
+        protected getColumnsKey() { return "SportFlow.OrderDetailsColumns"; }
         protected getDialogType() { return OrderDetailsDialog; }
         protected getLocalTextPrefix() { return OrderDetailsRow.localTextPrefix; }
         protected getAddButtonCaption() { return "Agregar Producto"; }

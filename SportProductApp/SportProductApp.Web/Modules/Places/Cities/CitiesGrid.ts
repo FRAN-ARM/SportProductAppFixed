@@ -1,9 +1,8 @@
-﻿
 namespace SportProductApp.Places {
 
     @Serenity.Decorators.registerClass()
     export class CitiesGrid extends Serenity.EntityGrid<CitiesRow, any> {
-        protected getColumnsKey() { return 'Places.Cities'; }
+        protected getColumnsKey() { return 'Places.CitiesColumns'; }
         protected getDialogType() { return CitiesDialog; }
         protected getIdProperty() { return CitiesRow.idProperty; }
         protected getInsertPermission() { return CitiesRow.insertPermission; }

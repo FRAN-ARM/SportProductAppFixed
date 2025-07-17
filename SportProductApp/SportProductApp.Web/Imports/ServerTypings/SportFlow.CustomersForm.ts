@@ -8,7 +8,7 @@
     }
 
     export class CustomersForm extends Serenity.PrefixedContext {
-        static formKey = 'SportFlow.Customers';
+        static formKey = 'SportFlow.CustomersForm';
         private static init: boolean;
 
         constructor(prefix: string) {

@@ -1,4 +1,4 @@
-﻿
+
 namespace SportProductApp.Places.Columns
 {
     using Serenity;
@@ -9,7 +9,7 @@ namespace SportProductApp.Places.Columns
     using System.Collections.Generic;
     using System.IO;
 
-    [ColumnsScript("Places.Provinces")]
+    [ColumnsScript("Places.ProvincesColumns")]
     [BasedOnRow(typeof(Entities.ProvincesRow), CheckNames = true)]
     public class ProvincesColumns
     {

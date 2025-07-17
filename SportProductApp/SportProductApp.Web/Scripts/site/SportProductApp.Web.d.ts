@@ -555,6 +555,8 @@ declare namespace SportProductApp.Membership {
         Password?: string;
     }
 }
+declare namespace SportProductApp.Modules.SportFlow {
+}
 declare namespace SportProductApp.Places {
 }
 declare namespace SportProductApp.Places {
@@ -579,7 +581,7 @@ declare namespace SportProductApp.Places {
         const idProperty = "CityId";
         const nameProperty = "Name";
         const localTextPrefix = "Places.Cities";
-        const lookupKey = "Places.Cities";
+        const lookupKey = "Places.CitiesRow";
         function getLookup(): Q.Lookup<CitiesRow>;
         const deletePermission = "Administration:General";
         const insertPermission = "Administration:General";
@@ -631,7 +633,7 @@ declare namespace SportProductApp.Places {
         const idProperty = "ProvinceId";
         const nameProperty = "Name";
         const localTextPrefix = "Places.Provinces";
-        const lookupKey = "Places.Provinces";
+        const lookupKey = "Places.ProvincesRow";
         function getLookup(): Q.Lookup<ProvincesRow>;
         const deletePermission = "Administration:General";
         const insertPermission = "Administration:General";
@@ -718,7 +720,7 @@ declare namespace SportProductApp.SportFlow {
         const idProperty = "CustomerId";
         const nameProperty = "PublicId";
         const localTextPrefix = "SportFlow.Customers";
-        const lookupKey = "SportFlow.Customers";
+        const lookupKey = "SportFlow.CustomersRow";
         function getLookup(): Q.Lookup<CustomersRow>;
         const deletePermission = "Administration:General";
         const insertPermission = "Administration:General";
@@ -776,8 +778,8 @@ declare namespace SportProductApp.SportFlow {
 }
 declare namespace SportProductApp.SportFlow {
     interface OrderDetailsForm {
-        OrderId: Serenity.IntegerEditor;
-        ProductId: Serenity.IntegerEditor;
+        OrderId: Serenity.LookupEditor;
+        ProductId: Serenity.LookupEditor;
         Quantity: Serenity.IntegerEditor;
         PriceSnapshot: Serenity.DecimalEditor;
     }
@@ -886,10 +888,12 @@ declare namespace SportProductApp.SportFlow {
         const idProperty = "OrderId";
         const nameProperty = "PublicId";
         const localTextPrefix = "SportFlow.Orders";
-        const deletePermission = "Administration:General";
-        const insertPermission = "Administration:General";
-        const readPermission = "Administration:General";
-        const updatePermission = "Administration:General";
+        const lookupKey = "SportFlow.OrdersRow";
+        function getLookup(): Q.Lookup<OrdersRow>;
+        const deletePermission = "Customers:General";
+        const insertPermission = "Customers:General";
+        const readPermission = "Customers:General";
+        const updatePermission = "Customers:General";
         const enum Fields {
             OrderId = "OrderId",
             PublicId = "PublicId",
@@ -952,7 +956,7 @@ declare namespace SportProductApp.SportFlow {
         const idProperty = "ProductId";
         const nameProperty = "PublicId";
         const localTextPrefix = "SportFlow.Products";
-        const lookupKey = "SportFlow.Products";
+        const lookupKey = "SportFlow.ProductsRow";
         function getLookup(): Q.Lookup<ProductsRow>;
         const deletePermission = "Administration:General";
         const insertPermission = "Administration:General";

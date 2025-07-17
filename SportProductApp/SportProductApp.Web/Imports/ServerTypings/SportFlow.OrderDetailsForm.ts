@@ -1,13 +1,13 @@
 ﻿namespace SportProductApp.SportFlow {
     export interface OrderDetailsForm {
-        OrderId: Serenity.IntegerEditor;
-        ProductId: Serenity.IntegerEditor;
+        OrderId: Serenity.LookupEditor;
+        ProductId: Serenity.LookupEditor;
         Quantity: Serenity.IntegerEditor;
         PriceSnapshot: Serenity.DecimalEditor;
     }
 
     export class OrderDetailsForm extends Serenity.PrefixedContext {
-        static formKey = 'SportFlow.OrderDetails';
+        static formKey = 'SportFlow.OrderDetailsForm';
         private static init: boolean;
 
         constructor(prefix: string) {
@@ -17,14 +17,15 @@
                 OrderDetailsForm.init = true;
 
                 var s = Serenity;
-                var w0 = s.IntegerEditor;
-                var w1 = s.DecimalEditor;
+                var w0 = s.LookupEditor;
+                var w1 = s.IntegerEditor;
+                var w2 = s.DecimalEditor;
 
                 Q.initFormType(OrderDetailsForm, [
                     'OrderId', w0,
                     'ProductId', w0,
-                    'Quantity', w0,
-                    'PriceSnapshot', w1
+                    'Quantity', w1,
+                    'PriceSnapshot', w2
                 ]);
             }
         }

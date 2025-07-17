@@ -6,6 +6,7 @@ namespace SportProductApp.SportFlow.Endpoints
     using Serenity.Services;
     using SportProductApp.Administration.Entities;
     using SportProductApp.Administration.Repositories;
+    using SportProductApp.Modules.Common.UserManagment;
     using SportProductApp.SportFlow.Customers;
     using SportProductApp.SportFlow.Entities;
     using SportProductApp.SportFlow.Forms;
@@ -33,8 +34,16 @@ namespace SportProductApp.SportFlow.Endpoints
             // Check previo.
             if (string.IsNullOrWhiteSpace(form.UserUsername) ||
                 string.IsNullOrWhiteSpace(form.UserDisplayName) ||
-                string.IsNullOrWhiteSpace(form.UserEmail))
+                string.IsNullOrWhiteSpace(form.UserEmail) ||
+                string.IsNullOrWhiteSpace(form.CreditCard) )
                 throw new ArgumentNullException("Required fields are missing.");
+
+            // Validar la cantidad de caracteres correctos para una tarjeta de credito.
+            var CreditCardLength = form.CreditCard.Length;
+            if ( (CreditCardLength >= 15 && CreditCardLength <= 16) == false)
+            {
+                throw new ArgumentNullException("Please enter the correct number of digits for the credit card number.");
+            };
 
             // Generar hash.
             string salt = null;
@@ -72,6 +81,8 @@ namespace SportProductApp.SportFlow.Endpoints
                 DateCreated = DateTime.UtcNow
             };
             uow.Connection.Insert(customer);
+
+            UserRoleAndPermissionHelper.AssignRoleAndPermission(uow.Connection, userId, "Customer", "Customers:General");
 
             return new SaveResponse { EntityId = userId };
             //return new MyRepository().Create(uow, customer);
