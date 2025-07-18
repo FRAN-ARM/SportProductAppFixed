@@ -1,6 +1,6 @@
 Si vas a ejecutarlo, sigue estos 4 mandamientos:
 
-1. Limpiar el proyecto.
+1. Limpiar la solucion.
 2. "Build".
 3. T4 Transform.
 4. Ejecuta.
