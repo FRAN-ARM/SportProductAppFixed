@@ -12,9 +12,6 @@ namespace SportProductApp.SportFlow.Forms
     [FormScript("SportFlow.CustomersForm")]
     public class CustomersForm
     {
-        /*[StaticTextBlock(HideLabel = true, IsHtml = true, Text = "<h4 class='text-blue'>Welcome to Order Wizard!</h4>"]
-        public string WelcomeMessage { get; set; }*/
-
         [Required, MaxLength(100)]
         [DisplayName("Username"), Width(200)]
         public String UserUsername { get; set; }

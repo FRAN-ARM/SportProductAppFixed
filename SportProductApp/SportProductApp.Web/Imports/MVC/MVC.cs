@@ -126,6 +126,15 @@ namespace MVC
             {
                 public const string ProductsIndex = "~/Modules/SportFlow/Products/ProductsIndex.cshtml";
             }
+
+        }
+
+        public static class SportFlowCustomers
+        {
+            public static class Orders
+            {
+                public const string CustomersOrdersIndex = "~/Modules/SportFlowCustomers/Orders/CustomersOrdersIndex.cshtml";
+            }
         }
     }
 }

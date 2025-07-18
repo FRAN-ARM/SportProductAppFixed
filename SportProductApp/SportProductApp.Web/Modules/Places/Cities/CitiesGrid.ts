@@ -12,5 +12,14 @@ namespace SportProductApp.Places {
         constructor(container: JQuery) {
             super(container);
         }
+
+        protected getButtons(): Serenity.ToolButton[] {
+            let buttons = super.getButtons();
+            buttons.push(Common.PdfExportHelper.createToolButton({
+                grid: this,
+                onViewSubmit: () => this.onViewSubmit()
+            }));
+            return buttons;
+        }
     }
 }

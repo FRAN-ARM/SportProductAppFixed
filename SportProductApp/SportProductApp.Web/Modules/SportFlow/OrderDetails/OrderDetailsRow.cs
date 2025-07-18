@@ -5,6 +5,7 @@ namespace SportProductApp.SportFlow.Entities
     using Serenity.ComponentModel;
     using Serenity.Data;
     using Serenity.Data.Mapping;
+    using SportProductApp.SportFlow.Order.Enums;
     using System;
     using System.ComponentModel;
     using System.IO;
@@ -22,14 +23,15 @@ namespace SportProductApp.SportFlow.Entities
             set { Fields.OrderDetailId[this] = value; }
         }
 
-        [DisplayName("Order"), NotNull, ForeignKey("[dbo].[Orders]", "OrderId"), LeftJoin("jOrder"), TextualField("OrderPublicId")]
+        [DisplayName("Order"), NotNull, PrimaryKey, ForeignKey(typeof(OrdersRow)), LeftJoin("o"), TextualField("OrderPublicId"),
+        LookupEditor(typeof(OrdersRow), InplaceAdd = false)]
         public Int32? OrderId
         {
             get { return Fields.OrderId[this]; }
             set { Fields.OrderId[this] = value; }
         }
 
-        [DisplayName("Product"), NotNull, ForeignKey("[dbo].[Products]", "ProductId"), LeftJoin("jProduct"), TextualField("ProductPublicId")]
+        [DisplayName("Product"), NotNull, PrimaryKey, ForeignKey(typeof(ProductsRow)), LeftJoin("p"), TextualField("ProductPublicId")]
         public Int32? ProductId
         {
             get { return Fields.ProductId[this]; }
@@ -43,70 +45,77 @@ namespace SportProductApp.SportFlow.Entities
             set { Fields.Quantity[this] = value; }
         }
 
-        [DisplayName("Price Snapshot"), Size(10), Scale(2), NotNull]
+        [DisplayName("Total"), Expression("(T0.[PriceSnapshot] * T0.[Quantity])"), DisplayFormat("#,##0.00")]
+        public Decimal? Total
+        {
+            get { return Fields.Total[this]; }
+            set { Fields.Total[this] = value; }
+        }
+
+        [DisplayName("Price Snapshot"), Size(10), Scale(2), NotNull, DisplayFormat("#,##0.00")]
         public Decimal? PriceSnapshot
         {
             get { return Fields.PriceSnapshot[this]; }
             set { Fields.PriceSnapshot[this] = value; }
         }
 
-        [DisplayName("Order Public Id"), Expression("jOrder.[PublicId]")]
+        [Origin("o"), DisplayName("Order Public Id"), Expression("o.[PublicId]")]
         public String OrderPublicId
         {
             get { return Fields.OrderPublicId[this]; }
             set { Fields.OrderPublicId[this] = value; }
         }
 
-        [DisplayName("Order Customer Id"), Expression("jOrder.[CustomerId]")]
+        [Origin("o"), DisplayName("Order Customer Id"), Expression("o.[CustomerId]")]
         public Int32? OrderCustomerId
         {
             get { return Fields.OrderCustomerId[this]; }
             set { Fields.OrderCustomerId[this] = value; }
         }
 
-        [DisplayName("Order Status"), Expression("jOrder.[Status]")]
-        public String OrderStatus
+        [Origin("o"), DisplayName("Order Status"), Expression("o.[Status]")]
+        public OrderStatusKind OrderStatus
         {
-            get { return Fields.OrderStatus[this]; }
-            set { Fields.OrderStatus[this] = value; }
+            get { return (OrderStatusKind)(OrderStatusKind?)Fields.OrderStatus[this]; }
+            set { Fields.OrderStatus[this] = (Int32?)value; }
         }
 
-        [DisplayName("Order Address"), Expression("jOrder.[Address]")]
+        [Origin("o"), DisplayName("Order Address"), Expression("o.[Address]")]
         public String OrderAddress
         {
             get { return Fields.OrderAddress[this]; }
             set { Fields.OrderAddress[this] = value; }
         }
 
-        [DisplayName("Order Date Created"), Expression("jOrder.[DateCreated]")]
+        [Origin("o"), DisplayName("Order Date Created"), Expression("o.[DateCreated]")]
         public DateTime? OrderDateCreated
         {
             get { return Fields.OrderDateCreated[this]; }
             set { Fields.OrderDateCreated[this] = value; }
         }
 
-        [DisplayName("Product Public Id"), Expression("jProduct.[PublicId]")]
+        [Origin("p"), DisplayName("Product Public Id"), Expression("p.[PublicId]")]
         public String ProductPublicId
         {
             get { return Fields.ProductPublicId[this]; }
             set { Fields.ProductPublicId[this] = value; }
         }
 
-        [DisplayName("Product Name"), Expression("jProduct.[Name]")]
+        [Origin("p"), DisplayName("Product Name"), Expression("p.[Name]")]
         public String ProductName
         {
             get { return Fields.ProductName[this]; }
             set { Fields.ProductName[this] = value; }
         }
 
-        [DisplayName("Product Price"), Expression("jProduct.[Price]")]
+        [Origin("p"), DisplayName("Product Price"), Expression("p.[Price]")]
         public Decimal? ProductPrice
         {
             get { return Fields.ProductPrice[this]; }
             set { Fields.ProductPrice[this] = value; }
         }
 
-        [DisplayName("Product Date Created"), Expression("jProduct.[DateCreated]")]
+        [Origin("p"), DisplayName("Product Date Created"), Expression("p.[DateCreated]")]
         public DateTime? ProductDateCreated
         {
             get { return Fields.ProductDateCreated[this]; }
@@ -132,10 +141,11 @@ namespace SportProductApp.SportFlow.Entities
             public Int32Field ProductId;
             public Int32Field Quantity;
             public DecimalField PriceSnapshot;
+            public DecimalField Total;
 
             public StringField OrderPublicId;
             public Int32Field OrderCustomerId;
-            public StringField OrderStatus;
+            public Int32Field OrderStatus;
             public StringField OrderAddress;
             public DateTimeField OrderDateCreated;
 

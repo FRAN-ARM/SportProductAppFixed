@@ -5,9 +5,10 @@
         ProductId?: number;
         Quantity?: number;
         PriceSnapshot?: number;
+        Total?: number;
         OrderPublicId?: string;
         OrderCustomerId?: number;
-        OrderStatus?: string;
+        OrderStatus?: SportFlow.Order.Enums.OrderStatusKind;
         OrderAddress?: string;
         OrderDateCreated?: string;
         ProductPublicId?: string;
@@ -30,6 +31,7 @@
             ProductId = "ProductId",
             Quantity = "Quantity",
             PriceSnapshot = "PriceSnapshot",
+            Total = "Total",
             OrderPublicId = "OrderPublicId",
             OrderCustomerId = "OrderCustomerId",
             OrderStatus = "OrderStatus",

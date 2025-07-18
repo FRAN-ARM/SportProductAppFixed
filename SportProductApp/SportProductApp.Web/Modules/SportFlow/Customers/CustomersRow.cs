@@ -5,6 +5,7 @@ namespace SportProductApp.SportFlow.Entities
     using Serenity.ComponentModel;
     using Serenity.Data;
     using Serenity.Data.Mapping;
+    using SportProductApp.Administration.Entities;
     using System;
     using System.ComponentModel;
     using System.IO;
@@ -30,7 +31,7 @@ namespace SportProductApp.SportFlow.Entities
             set { Fields.PublicId[this] = value; }
         }
 
-        [DisplayName("User"), NotNull, ForeignKey("[dbo].[Users]", "UserId"), LeftJoin("jUser"), TextualField("UserPublicId")]
+        [DisplayName("User"), NotNull, PrimaryKey, ForeignKey(typeof(UserRow)), LeftJoin("u"), TextualField("UserPublicId")]
         public Int32? UserId
         {
             get { return Fields.UserId[this]; }
@@ -58,98 +59,98 @@ namespace SportProductApp.SportFlow.Entities
             set { Fields.DateCreated[this] = value; }
         }
 
-        [DisplayName("User Public Id"), Expression("jUser.[PublicId]")]
+        [Origin("u"), DisplayName("User Public Id"), Expression("u.[PublicId]")]
         public String UserPublicId
         {
             get { return Fields.UserPublicId[this]; }
             set { Fields.UserPublicId[this] = value; }
         }
 
-        [DisplayName("User Username"), Expression("jUser.[Username]")]
+        [Origin("u"), DisplayName("User Username"), Expression("u.[Username]")]
         public String UserUsername
         {
             get { return Fields.UserUsername[this]; }
             set { Fields.UserUsername[this] = value; }
         }
 
-        [DisplayName("User Display Name"), Expression("jUser.[DisplayName]")]
+        [Origin("u"), DisplayName("User Display Name"), Expression("u.[DisplayName]")]
         public String UserDisplayName
         {
             get { return Fields.UserDisplayName[this]; }
             set { Fields.UserDisplayName[this] = value; }
         }
 
-        [DisplayName("User Email"), Expression("jUser.[Email]")]
+        [Origin("u"), DisplayName("User Email"), Expression("u.[Email]")]
         public String UserEmail
         {
             get { return Fields.UserEmail[this]; }
             set { Fields.UserEmail[this] = value; }
         }
 
-        [DisplayName("User Source"), Expression("jUser.[Source]")]
+        [Origin("u"), DisplayName("User Source"), Expression("u.[Source]")]
         public String UserSource
         {
             get { return Fields.UserSource[this]; }
             set { Fields.UserSource[this] = value; }
         }
 
-        [DisplayName("User Password Hash"), Expression("jUser.[PasswordHash]")]
+        [Origin("u"), DisplayName("User Password Hash"), Expression("u.[PasswordHash]")]
         public String UserPasswordHash
         {
             get { return Fields.UserPasswordHash[this]; }
             set { Fields.UserPasswordHash[this] = value; }
         }
 
-        [DisplayName("User Password Salt"), Expression("jUser.[PasswordSalt]")]
+        [Origin("u"), DisplayName("User Password Salt"), Expression("u.[PasswordSalt]")]
         public String UserPasswordSalt
         {
             get { return Fields.UserPasswordSalt[this]; }
             set { Fields.UserPasswordSalt[this] = value; }
         }
 
-        [DisplayName("User Last Directory Update"), Expression("jUser.[LastDirectoryUpdate]")]
+        [Origin("u"), DisplayName("User Last Directory Update"), Expression("u.[LastDirectoryUpdate]")]
         public DateTime? UserLastDirectoryUpdate
         {
             get { return Fields.UserLastDirectoryUpdate[this]; }
             set { Fields.UserLastDirectoryUpdate[this] = value; }
         }
 
-        [DisplayName("User User Image"), Expression("jUser.[UserImage]")]
+        [Origin("u"), DisplayName("User User Image"), Expression("u.[UserImage]")]
         public String UserUserImage
         {
             get { return Fields.UserUserImage[this]; }
             set { Fields.UserUserImage[this] = value; }
         }
 
-        [DisplayName("User Insert Date"), Expression("jUser.[InsertDate]")]
+        [Origin("u"), DisplayName("User Insert Date"), Expression("u.[InsertDate]")]
         public DateTime? UserInsertDate
         {
             get { return Fields.UserInsertDate[this]; }
             set { Fields.UserInsertDate[this] = value; }
         }
 
-        [DisplayName("User Insert User Id"), Expression("jUser.[InsertUserId]")]
+        [Origin("u"), DisplayName("User Insert User Id"), Expression("u.[InsertUserId]")]
         public Int32? UserInsertUserId
         {
             get { return Fields.UserInsertUserId[this]; }
             set { Fields.UserInsertUserId[this] = value; }
         }
 
-        [DisplayName("User Update Date"), Expression("jUser.[UpdateDate]")]
+        [Origin("u"), DisplayName("User Update Date"), Expression("u.[UpdateDate]")]
         public DateTime? UserUpdateDate
         {
             get { return Fields.UserUpdateDate[this]; }
             set { Fields.UserUpdateDate[this] = value; }
         }
 
-        [DisplayName("User Update User Id"), Expression("jUser.[UpdateUserId]")]
+        [Origin("u"), DisplayName("User Update User Id"), Expression("u.[UpdateUserId]")]
         public Int32? UserUpdateUserId
         {
             get { return Fields.UserUpdateUserId[this]; }
             set { Fields.UserUpdateUserId[this] = value; }
         }
 
-        [DisplayName("User Is Active"), Expression("jUser.[IsActive]")]
+        [Origin("u"), DisplayName("User Is Active"), Expression("u.[IsActive]")]
         public Int16? UserIsActive
         {
             get { return Fields.UserIsActive[this]; }

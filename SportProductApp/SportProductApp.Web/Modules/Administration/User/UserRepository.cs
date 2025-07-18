@@ -251,7 +251,11 @@ namespace SportProductApp.Administration.Repositories
             protected override void AfterSave()
             {
                 base.AfterSave();
-                AssignDefaultRoleAndPermissions();
+                // El rol y permisos solo se asignan en la creacion de usuario del cliente.
+                if (IsCreate)
+                {
+                    AssignDefaultRoleAndPermissions();
+                }
                 BatchGenerationUpdater.OnCommit(this.UnitOfWork, fld.GenerationKey);
             }
         }

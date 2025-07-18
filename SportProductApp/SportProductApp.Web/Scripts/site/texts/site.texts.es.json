@@ -25,7 +25,7 @@
     "Forms.Membership.ForgotPassword.SubmitButton": "Resetear mi contraseña",
     "Forms.Membership.ForgotPassword.Success": "Se ha enviado un e-mail con instrucciones para restablecer la contraseña.",
     "Forms.Membership.Login.ForgotPassword": "Olvidó su contraseña?",
-    "Forms.Membership.Login.FormTitle": "BIENVENIDOS A SERENE",
+    "Forms.Membership.Login.FormTitle": "SPORT-FLOW APP",
     "Forms.Membership.Login.SignUpButton": "Registrar una cuenta nueva",
     "Forms.Membership.ResetPassword.EmailSubject": "Restablecer contraseña en SportProductAppTemplate",
     "Forms.Membership.ResetPassword.FormTitle": "Restablecer contraseña",

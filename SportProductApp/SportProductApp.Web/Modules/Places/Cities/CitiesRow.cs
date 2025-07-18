@@ -16,14 +16,14 @@ namespace SportProductApp.Places.Entities
     [LookupScript("Places.CitiesRow")]
     public sealed class CitiesRow : Row, IIdRow, INameRow
     {
-        [DisplayName("City Id"), Identity]
+        [DisplayName("City Id"), Identity, PrimaryKey]
         public Int32? CityId
         {
             get { return Fields.CityId[this]; }
             set { Fields.CityId[this] = value; }
         }
 
-        [DisplayName("Province"), NotNull, ForeignKey("[dbo].[Provinces]", "ProvinceId"), LeftJoin("jProvince"), TextualField("ProvinceName")]
+        [DisplayName("Province"), NotNull, PrimaryKey, ForeignKey(typeof(ProvincesRow)), LeftJoin("pr"), TextualField("ProvinceName")]
         [LookupInclude]
         public Int32? ProvinceId
         {
@@ -38,7 +38,7 @@ namespace SportProductApp.Places.Entities
             set { Fields.Name[this] = value; }
         }
 
-        [DisplayName("Province Name"), Expression("jProvince.[Name]")]
+        [Origin("pr"), DisplayName("Province Name"), Expression("pr.[Name]")]
         public String ProvinceName
         {
             get { return Fields.ProvinceName[this]; }

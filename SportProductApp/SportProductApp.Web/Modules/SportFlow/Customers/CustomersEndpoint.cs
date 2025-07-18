@@ -21,11 +21,6 @@ namespace SportProductApp.SportFlow.Endpoints
     [ConnectionKey(typeof(MyRow)), ServiceAuthorize(typeof(MyRow))]
     public class CustomersController : ServiceEndpoint
     {
-        /*[HttpPost, AuthorizeCreate(typeof(MyRow))]
-        public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
-        {
-            return new MyRepository().Create(uow, request);
-        }*/
         [HttpPost, AuthorizeCreate(typeof(MyRow))]
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<CustomersForm> request)
         {
@@ -55,7 +50,7 @@ namespace SportProductApp.SportFlow.Endpoints
                 Username = form.UserUsername.Trim(),
                 DisplayName = form.UserDisplayName.Trim(),
                 Email = form.UserEmail?.Trim(),
-                Source = "custom",
+                Source = "cust",
                 PasswordHash = hash,
                 PasswordSalt = salt,
                 InsertDate = DateTime.UtcNow,

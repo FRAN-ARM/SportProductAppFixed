@@ -1,23 +1,37 @@
-﻿
-namespace SportProductApp.SportFlow.Columns
+﻿namespace SportProductApp.SportFlow.Columns
 {
-    using Serenity;
     using Serenity.ComponentModel;
-    using Serenity.Data;
     using System;
-    using System.ComponentModel;
-    using System.Collections.Generic;
-    using System.IO;
 
     [ColumnsScript("SportFlow.OrderDetailsColumns")]
     [BasedOnRow(typeof(Entities.OrderDetailsRow), CheckNames = true)]
     public class OrderDetailsColumns
     {
-        [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
-        public Int32 OrderDetailId { get; set; }
-        public String OrderPublicId { get; set; }
-        public String ProductPublicId { get; set; }
-        public Int32 Quantity { get; set; }
-        public Decimal PriceSnapshot { get; set; }
+        [Width(200)]
+        public string OrderPublicId { get; set; }
+
+        [Width(200)]
+        public string ProductPublicId { get; set; }
+
+        [Width(200)]
+        public string ProductName { get; set; }
+
+        [Width(120)]
+        public decimal ProductPrice { get; set; }
+
+        [Width(150)]
+        public DateTime ProductDateCreated { get; set; }
+
+        [Width(100)]
+        public int Quantity { get; set; }
+
+        [Width(120)]
+        public decimal PriceSnapshot { get; set; }
+
+        [Width(100)]
+        public decimal Total { get; set; }
+
+        [Width(150)]
+        public string OrderStatus { get; set; }
     }
 }

@@ -24,5 +24,14 @@ namespace SportProductApp.SportFlow {
                 this.form.Address.value = "DIR";
             }
         }
+
+        protected getDialogTitle(): string {
+            let baseTitle = super.getDialogTitle();
+            if (this.entity && this.entity.PublicId)
+            {
+                return `${baseTitle} - PublicId: ${this.entity.PublicId}`;
+            }
+            return baseTitle;
+        }
     }
 }

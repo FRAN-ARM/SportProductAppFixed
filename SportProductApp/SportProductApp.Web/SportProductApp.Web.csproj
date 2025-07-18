@@ -543,6 +543,8 @@
     <Content Include="Content\serenity\serenity.editors.css" />
     <Content Include="Content\serenity\serenity.jquery-ui.messagedialogs.css" />
     <Content Include="Content\simple-line-icons.css" />
+    <Content Include="Content\site\images\iconSportFlow.svg" />
+    <Content Include="Content\site\images\iconSportFlowDark.svg" />
     <Content Include="Content\slick-default-theme.css" />
     <Content Include="Content\slick.columnpicker.css" />
     <Content Include="Content\slick.grid.css" />
@@ -1086,6 +1088,18 @@
     <TypeScriptCompile Include="Imports\ServerTypings\SportFlow.ProductsColumns.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\SportFlowCustomers.CustomerOrdersColumns.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\SportFlowCustomers.CustomersOrdersForm.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\SportFlowCustomers.CustomersOrdersRow.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Imports\ServerTypings\SportFlowCustomers.CustomersOrdersService.ts">
+      <DependentUpon>ServerTypings.tt</DependentUpon>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Imports\ServerTypings\Texts.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
@@ -1097,7 +1111,6 @@
     <Compile Include="Migrations\DefaultDB\DefaultDB_20250710_000008_OrdersChangeTypeStatus.cs" />
     <Compile Include="Modules\Common\UserManagment\UserRoleAndPermissionHelper.cs" />
     <Compile Include="Modules\Places\Cities\CitiesLookup.cs" />
-    <Compile Include="Modules\SportFlow\OrderDetails\OrderDetailsEditorAttribute.cs" />
     <TypeScriptCompile Include="node_modules\%40types\jquery\index.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\jqueryui\index.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\jquery.blockui\index.d.ts" />
@@ -1743,6 +1756,17 @@
     <TypeScriptCompile Include="Imports\ServerTypings\Places.ProvincesForm.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
+    <Compile Include="Modules\SportFlowCustomers\Orders\CustomersOrdersRow.cs" />
+    <Compile Include="Modules\SportFlowCustomers\Orders\CustomersOrdersRepository.cs" />
+    <Compile Include="Modules\SportFlowCustomers\Orders\CustomersOrdersEndpoint.cs" />
+    <Compile Include="Modules\SportFlowCustomers\Orders\CustomersOrdersPage.cs" />
+    <Content Include="Modules\SportFlowCustomers\Orders\CustomersOrdersIndex.cshtml" />
+    <Compile Include="Modules\SportFlowCustomers\Orders\CustomersOrdersColumns.cs" />
+    <Compile Include="Modules\SportFlowCustomers\Orders\CustomersOrdersForm.cs" />
+    <TypeScriptCompile Include="Modules\SportFlowCustomers\Orders\CustomersOrdersDialog.ts" />
+    <TypeScriptCompile Include="Modules\SportFlowCustomers\Orders\CustomersOrdersGrid.ts" />
+    <Compile Include="Modules\SportFlowCustomers\SportFlowCustomersNavigation.cs" />
+    <Content Include="Content\site\site.sportflowcustomers.less" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />

@@ -1,5 +1,5 @@
 ﻿
-namespace SportProductApp.SportFlow.Columns
+namespace SportProductApp.SportFlowCustomers.Columns
 {
     using Serenity;
     using Serenity.ComponentModel;
@@ -8,23 +8,21 @@ namespace SportProductApp.SportFlow.Columns
     using System.ComponentModel;
     using System.Collections.Generic;
     using System.IO;
+    using SportProductApp.SportFlow.Order.Enums;
 
-    [ColumnsScript("SportFlow.OrdersColumns")]
-    [BasedOnRow(typeof(Entities.OrdersRow), CheckNames = true)]
-    public class OrdersColumns
+    [ColumnsScript("SportFlowCustomers.CustomersOrdersColumns")]
+    [BasedOnRow(typeof(Entities.CustomersOrdersRow), CheckNames = true)]
+    public class CustomerOrdersColumns
     {
-        [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
-        public Int32 OrderId { get; set; }
         [Width(240)]
-        [EditLink]
         public String PublicId { get; set; }
         [Width(240)]
         public String CustomerPublicId { get; set; }
-        [Width(180)]
-        public Int32 Status { get; set; }
+        [Width(180), EnumEditor, QuickFilter]
+        public OrderStatusKind Status { get; set; }
         [Width(240)]
         public String Address { get; set; }
-        [Width(240)]
+        [Width(240), QuickFilter]
         public DateTime DateCreated { get; set; }
     }
 }

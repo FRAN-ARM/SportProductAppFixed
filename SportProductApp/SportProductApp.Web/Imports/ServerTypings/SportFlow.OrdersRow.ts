@@ -25,10 +25,10 @@
         export function getLookup(): Q.Lookup<OrdersRow> {
             return Q.getLookup<OrdersRow>('SportFlow.OrdersRow');
         }
-        export const deletePermission = 'Customers:General';
-        export const insertPermission = 'Customers:General';
-        export const readPermission = 'Customers:General';
-        export const updatePermission = 'Customers:General';
+        export const deletePermission = 'Administration:General';
+        export const insertPermission = 'Administration:General';
+        export const readPermission = 'Administration:General';
+        export const updatePermission = 'Administration:General';
 
         export declare const enum Fields {
             OrderId = "OrderId",

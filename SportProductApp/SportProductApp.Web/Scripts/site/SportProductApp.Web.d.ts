@@ -796,9 +796,10 @@ declare namespace SportProductApp.SportFlow {
         ProductId?: number;
         Quantity?: number;
         PriceSnapshot?: number;
+        Total?: number;
         OrderPublicId?: string;
         OrderCustomerId?: number;
-        OrderStatus?: string;
+        OrderStatus?: SportFlow.Order.Enums.OrderStatusKind;
         OrderAddress?: string;
         OrderDateCreated?: string;
         ProductPublicId?: string;
@@ -819,6 +820,7 @@ declare namespace SportProductApp.SportFlow {
             ProductId = "ProductId",
             Quantity = "Quantity",
             PriceSnapshot = "PriceSnapshot",
+            Total = "Total",
             OrderPublicId = "OrderPublicId",
             OrderCustomerId = "OrderCustomerId",
             OrderStatus = "OrderStatus",
@@ -890,10 +892,10 @@ declare namespace SportProductApp.SportFlow {
         const localTextPrefix = "SportFlow.Orders";
         const lookupKey = "SportFlow.OrdersRow";
         function getLookup(): Q.Lookup<OrdersRow>;
-        const deletePermission = "Customers:General";
-        const insertPermission = "Customers:General";
-        const readPermission = "Customers:General";
-        const updatePermission = "Customers:General";
+        const deletePermission = "Administration:General";
+        const insertPermission = "Administration:General";
+        const readPermission = "Administration:General";
+        const updatePermission = "Administration:General";
         const enum Fields {
             OrderId = "OrderId",
             PublicId = "PublicId",
@@ -985,6 +987,76 @@ declare namespace SportProductApp.SportFlow {
             Delete = "SportFlow/Products/Delete",
             Retrieve = "SportFlow/Products/Retrieve",
             List = "SportFlow/Products/List"
+        }
+    }
+}
+declare namespace SportProductApp.SportFlowCustomers {
+}
+declare namespace SportProductApp.SportFlowCustomers {
+    interface CustomersOrdersForm {
+        PublicId: Serenity.StringEditor;
+        CustomerId: Serenity.IntegerEditor;
+        Address: Serenity.StringEditor;
+        DateCreated: Serenity.DateEditor;
+        Status: Serenity.EnumEditor;
+    }
+    class CustomersOrdersForm extends Serenity.PrefixedContext {
+        static formKey: string;
+        private static init;
+        constructor(prefix: string);
+    }
+}
+declare namespace SportProductApp.SportFlowCustomers {
+    interface CustomersOrdersRow {
+        OrderId?: number;
+        PublicId?: string;
+        CustomerId?: number;
+        Address?: string;
+        DateCreated?: string;
+        Status?: SportFlow.Order.Enums.OrderStatusKind;
+        CustomerPublicId?: string;
+        CustomerUserId?: number;
+        CustomerName?: string;
+        CustomerCreditCard?: string;
+        CustomerDateCreated?: string;
+    }
+    namespace CustomersOrdersRow {
+        const idProperty = "OrderId";
+        const nameProperty = "PublicId";
+        const localTextPrefix = "SportFlowCustomers.CustomersOrders";
+        const deletePermission = "Customers:General";
+        const insertPermission = "Customers:General";
+        const readPermission = "Customers:General";
+        const updatePermission = "Customers:General";
+        const enum Fields {
+            OrderId = "OrderId",
+            PublicId = "PublicId",
+            CustomerId = "CustomerId",
+            Address = "Address",
+            DateCreated = "DateCreated",
+            Status = "Status",
+            CustomerPublicId = "CustomerPublicId",
+            CustomerUserId = "CustomerUserId",
+            CustomerName = "CustomerName",
+            CustomerCreditCard = "CustomerCreditCard",
+            CustomerDateCreated = "CustomerDateCreated"
+        }
+    }
+}
+declare namespace SportProductApp.SportFlowCustomers {
+    namespace CustomersOrdersService {
+        const baseUrl = "SportFlowCustomers/Orders";
+        function Create(request: Serenity.SaveRequest<CustomersOrdersRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Update(request: Serenity.SaveRequest<CustomersOrdersRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<CustomersOrdersRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<CustomersOrdersRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        const enum Methods {
+            Create = "SportFlowCustomers/Orders/Create",
+            Update = "SportFlowCustomers/Orders/Update",
+            Delete = "SportFlowCustomers/Orders/Delete",
+            Retrieve = "SportFlowCustomers/Orders/Retrieve",
+            List = "SportFlowCustomers/Orders/List"
         }
     }
 }
@@ -1479,6 +1551,7 @@ declare namespace SportProductApp.Places {
         protected getLocalTextPrefix(): string;
         protected getService(): string;
         constructor(container: JQuery);
+        protected getButtons(): Serenity.ToolButton[];
     }
 }
 declare namespace SportProductApp.Places {
@@ -1503,6 +1576,7 @@ declare namespace SportProductApp.Places {
         protected getLocalTextPrefix(): string;
         protected getService(): string;
         constructor(container: JQuery);
+        protected getButtons(): Serenity.ToolButton[];
     }
 }
 declare namespace SportProductApp.SportFlow {
@@ -1528,6 +1602,7 @@ declare namespace SportProductApp.SportFlow {
         protected getLocalTextPrefix(): string;
         protected getService(): string;
         constructor(container: JQuery);
+        protected getButtons(): Serenity.ToolButton[];
     }
 }
 declare namespace SportProductApp.SportFlow {
@@ -1539,11 +1614,14 @@ declare namespace SportProductApp.SportFlow {
         protected getDeletePermission(): string;
         protected getInsertPermission(): string;
         protected getUpdatePermission(): string;
+        embedded: boolean;
+        embeddedOrderId: string;
         protected form: OrderDetailsForm;
+        constructor();
     }
 }
 declare namespace SportProductApp.SportFlow {
-    class OrderDetailsEditor extends SportProductApp.Common.GridEditorBase<OrderDetailsRow> {
+    class OrderDetailsEditor extends Common.GridEditorBase<OrderDetailsRow> {
         protected getColumnsKey(): string;
         protected getDialogType(): typeof OrderDetailsDialog;
         protected getLocalTextPrefix(): string;
@@ -1561,6 +1639,7 @@ declare namespace SportProductApp.SportFlow {
         protected getLocalTextPrefix(): string;
         protected getService(): string;
         constructor(container: JQuery);
+        protected getButtons(): Serenity.ToolButton[];
     }
 }
 declare namespace SportProductApp.SportFlow {
@@ -1575,6 +1654,7 @@ declare namespace SportProductApp.SportFlow {
         protected getUpdatePermission(): string;
         protected form: OrdersForm;
         protected afterLoadEntity(): void;
+        protected getDialogTitle(): string;
     }
 }
 declare namespace SportProductApp.SportFlow {
@@ -1586,6 +1666,7 @@ declare namespace SportProductApp.SportFlow {
         protected getLocalTextPrefix(): string;
         protected getService(): string;
         constructor(container: JQuery);
+        protected getButtons(): Serenity.ToolButton[];
     }
 }
 declare namespace SportProductApp.SportFlow {
@@ -1610,5 +1691,31 @@ declare namespace SportProductApp.SportFlow {
         protected getLocalTextPrefix(): string;
         protected getService(): string;
         constructor(container: JQuery);
+        protected getButtons(): Serenity.ToolButton[];
+    }
+}
+declare namespace SportProductApp.SportFlowCustomers {
+    class CustomersOrdersDialog extends Serenity.EntityDialog<CustomersOrdersRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected getDeletePermission(): string;
+        protected getInsertPermission(): string;
+        protected getUpdatePermission(): string;
+        protected form: CustomersOrdersForm;
+    }
+}
+declare namespace SportProductApp.SportFlowCustomers {
+    class CustomersOrdersGrid extends Serenity.EntityGrid<CustomersOrdersRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof CustomersOrdersDialog;
+        protected getIdProperty(): string;
+        protected getInsertPermission(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+        protected getButtons(): Serenity.ToolButton[];
     }
 }

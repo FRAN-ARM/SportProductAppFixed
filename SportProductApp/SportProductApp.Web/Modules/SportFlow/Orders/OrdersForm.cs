@@ -13,7 +13,6 @@ namespace SportProductApp.SportFlow.Forms
     using SportProductApp.Places.Entities;
 
     [FormScript("SportFlow.OrdersForm")]
-    /*[BasedOnRow(typeof(Entities.OrdersRow), CheckNames = true)]*/
     public class OrdersForm
     {
         [Hidden]

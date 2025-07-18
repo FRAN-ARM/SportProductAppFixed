@@ -11,7 +11,7 @@ namespace SportProductApp.SportFlow.Repositories
     using System.Collections.Generic;
     using System.Data;
     using MyRow = Entities.OrdersRow;
-
+    
     public class OrdersRepository
     {
         private static MyRow.RowFields fld { get { return MyRow.Fields; } }
@@ -42,8 +42,8 @@ namespace SportProductApp.SportFlow.Repositories
         }
 
         private class MySaveHandler : SaveRequestHandler<MyRow> {
-            [MasterDetailRelation(foreignKey: "OrderId", IncludeColumns = "ProductId, Quantity, PriceSnapshot")]
-            public List<OrderDetailsRow> ItemList => Row.ItemList;
+            /*[MasterDetailRelation(foreignKey: "OrderId", IncludeColumns = "ProductId, Quantity, PriceSnapshot")]
+            public List<OrderDetailsRow> ItemList => Row.ItemList;*/
             protected override void BeforeSave()
             {
                 base.BeforeSave();

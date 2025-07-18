@@ -13,5 +13,14 @@ namespace SportProductApp.SportFlow {
         constructor(container: JQuery) {
             super(container);
         }
+
+        protected getButtons() {
+            var buttons = super.getButtons();
+            buttons.push(Common.PdfExportHelper.createToolButton({
+                grid: this,
+                onViewSubmit: () => this.onViewSubmit()
+            }));
+            return buttons;
+        }
     }
 }
