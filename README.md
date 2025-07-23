@@ -1,3 +1,5 @@
+APP REMAKE: https://github.com/FRAN-ARM/SportFlowApp
+
 Si vas a ejecutarlo, sigue estos 4 mandamientos:
 
 1. Limpiar la solucion.
